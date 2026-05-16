@@ -1,0 +1,13 @@
+.DS_Store
+.env
+.env.local
+.env.*.local
+.worktree-id
+node_modules/
+dist/
+build/
+*.log
+*.tmp
+*.pem
+*.key
+credentials.json

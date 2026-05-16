@@ -1,0 +1,124 @@
+<!doctype html>
+<!-- Pattern A skeleton from references/visual-board-patterns.md. This is an asset-first visual Direction Board structure, not content to copy. -->
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Asset-first Direction Board Skeleton / 素材优先方向板骨架</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f1e7;
+      --ink: #241f1a;
+      --muted: #756a5f;
+      --line: #d8cdbd;
+      --accent: #c96442;
+      --panel: #fffaf0;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      line-height: 1.45;
+    }
+    main { width: min(1180px, calc(100vw - 32px)); margin: 0 auto; padding: 32px 0 64px; }
+    section { margin: 24px 0; padding: 22px; border: 1px solid var(--line); background: var(--panel); }
+    h1, h2, h3 { margin: 0 0 12px; line-height: 1.05; }
+    p { margin: 0 0 10px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .card { min-height: 150px; border: 1px solid var(--line); padding: 14px; background: rgba(255,255,255,.45); }
+    .thumb { height: 120px; display: grid; place-items: center; border: 1px dashed var(--line); color: var(--muted); background: rgba(201,100,66,.08); }
+    .strip { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; }
+    .strip .card { min-width: 260px; }
+    .long-shot { max-height: 240px; overflow: auto; border: 1px solid var(--line); background: #fff; padding: 12px; }
+    .mini { font-size: 13px; color: var(--muted); }
+    [data-ready-state="blocked"] { border-color: #9b2d22; }
+    [data-ready-state="ready"] { border-color: #4d7c45; }
+  </style>
+</head>
+<body>
+  <main>
+    <section data-stage="pre-board-convergence" data-confirmed="true">
+      <h1>Pre-board Convergence / Board 前收敛</h1>
+      <p>Record confirmed sections, assets, and mainline here before the visual board is generated.</p>
+      <p>在生成视觉板前，把已确认的章节、素材、主线记录在这里。</p>
+    </section>
+
+    <section data-stage="visual-contact-sheet" data-ready-state="blocked">
+      <h2>Visual Contact Sheet / 视觉总览</h2>
+      <div class="grid">
+        <div class="card"><div class="thumb">Hero frame mock / 主视觉帧</div><p>Mainline / 主线：...</p></div>
+        <div class="card"><div class="thumb">Must-use asset / 必用素材</div><p>Section chips / 章节标签：...</p></div>
+        <div class="card"><div class="thumb">Design route / 视觉路线</div><p>Ready state / 状态：blocked until assets load.</p></div>
+      </div>
+    </section>
+
+    <section data-stage="asset-wall">
+      <h2>Asset Wall / 素材墙</h2>
+      <div class="grid">
+        <article class="card" data-asset-id="asset-01" data-asset-role="hero-evidence" data-asset-status="must-use">
+          <div class="thumb">asset-01 thumbnail</div>
+          <h3>Asset 01 / 素材 01</h3>
+          <p>Role, crop, section assignment, risk.</p>
+        </article>
+        <article class="card" data-asset-id="asset-02" data-asset-role="context" data-asset-status="optional">
+          <div class="thumb">asset-02 thumbnail</div>
+          <h3>Asset 02 / 素材 02</h3>
+          <p>Role, crop, section assignment, risk.</p>
+        </article>
+        <article class="card" data-asset-id="asset-03" data-asset-role="long-webpage" data-asset-status="reference-only">
+          <div data-long-screenshot="true" class="long-shot">
+            Long screenshot placeholder. Keep this manually scrollable; never auto-scroll.
+            <div style="height: 520px"></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section data-stage="section-storyboard">
+      <h2>Section Storyboard / 章节分镜</h2>
+      <div class="strip">
+        <article class="card" data-section-id="section-01" data-page-id="page-01" data-page-state="ready">
+          <h3>01 / Hook</h3><div class="thumb">hero thumb</div><p>Assigned assets + transition anchor.</p>
+        </article>
+        <article class="card" data-section-id="section-02" data-page-id="page-02" data-page-state="blocked">
+          <h3>02 / Proof</h3><div class="thumb">hero thumb</div><p>Assigned assets + unresolved risk.</p>
+        </article>
+      </div>
+    </section>
+
+    <section data-stage="critical-frame-mockups">
+      <h2>Critical Frame Mockups / 关键帧 Mockup</h2>
+      <div class="grid">
+        <section class="card" data-critical-frame="entry" data-page-id="page-01"><h3>Entry / 进入帧</h3><div class="thumb">entry frame</div></section>
+        <section class="card" data-critical-frame="hero" data-page-id="page-01"><h3>Hero / 主视觉帧</h3><div class="thumb">hero frame</div></section>
+        <section class="card" data-critical-frame="transition" data-page-id="page-01"><h3>Transition / 转场帧</h3><div class="thumb">transition frame</div></section>
+      </div>
+    </section>
+
+    <section data-stage="visual-route" data-primary-design="docs/design-router/design-systems/core/.../DESIGN.md">
+      <h2>Visual Route / 视觉路线</h2>
+      <p>Design Router chooses aesthetic language. Pattern A keeps this board asset-first.</p>
+      <p>Design Router 选择审美语言；Pattern A 保持 board 素材优先。</p>
+    </section>
+
+    <section data-stage="motion-continuity-strip">
+      <h2>Motion & Continuity Strip / 动效与连续性条</h2>
+      <div class="strip"><div class="card">Anchor A → Anchor B</div><div class="card">Asset motion intent</div><div class="card">Text motion intent</div></div>
+    </section>
+
+    <section data-stage="compact-production-handoff" data-ready-state="blocked">
+      <h2>Compact Production Handoff / 小型生产交接</h2>
+      <p class="mini">Keep this small: ready state, missing assets, unresolved visual risks, Markdown sync, `04_render_plan.md` handoff state.</p>
+    </section>
+
+    <section data-stage="review-sync" data-sync-state="pending">
+      <h2>Review & Sync / 审查与同步</h2>
+      <p>Record user/agent review evidence and Markdown sync status here.</p>
+    </section>
+  </main>
+</body>
+</html>
