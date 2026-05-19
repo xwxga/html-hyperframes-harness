@@ -1,6 +1,6 @@
 ---
 name: hyperframes-direction-harness
-description: "Public reusable director-first harness for HyperFrames pre-generation review. Use before creating a final HyperFrames index.html when rhythm, shots, layouts, locked main copy, asset motion, style consistency, or comment-based revisions are not locked. Requires a reviewed direction_board.html and ready 04_render_plan.md before final composition generation."
+description: "Public reusable Director Workbench harness for HyperFrames pre-generation review. Use before creating a final HyperFrames index.html when rhythm, visual system, frame-by-frame intent, motion timeline, or comment-based revisions are not locked. Requires a reviewed direction_board.html and ready 04_render_plan.md before final composition generation."
 ---
 
 # HyperFrames Direction Harness
@@ -9,6 +9,7 @@ description: "Public reusable director-first harness for HyperFrames pre-generat
 
 | 时间 / Time | 作者 / Author | 变更 / Change |
 |---|---|---|
+| 2026-05-19 22:31 | Sisyphus | Upgraded the skill contract to Director Workbench v1.5 with Figma-like Overview/Frames views. / 将 skill 契约升级为 Director Workbench v1.5，包含 Figma-like Overview/Frames 视图。 |
 | 2026-05-18 16:22 | Sisyphus | Rewrote public skill contract around director-first preview boards, one-language UI, side annotations, and no production handoff board. |
 | 2026-05-17 00:42 | Sisyphus | Aligned workflow/checklist wording with public v1 Pattern A order and comment/aspect review gates. |
 | 2026-05-17 00:06 | Sisyphus | Repositioned the skill as a public reusable Visual Review harness with fixed board template, comments, and explicit v1 non-goals. |
@@ -26,14 +27,14 @@ Use this public reusable skill before generating a new final HyperFrames `index.
 
 在生成最终 HyperFrames `index.html` 之前，如果项目需要先做导演审查和方向收敛，使用本 skill。
 
-The central artifact is `direction_board.html`: a director-facing visual storyboard review surface for rhythm, shot relationship, layout, locked main copy, asset motion, and style consistency. It is not a production handoff board.
+The central artifact is `direction_board.html`, now named **Director Workbench** in the UI: a Figma-like review workbench with Overview and Frames views for rhythm, visual system, frame-by-frame intent, motion timeline, and comments. It is not a production handoff board.
 
-核心 artifact 是 `direction_board.html`：给导演看的视觉分镜审查界面，用来判断节奏、镜头关系、版面、已锁定主文字、素材运动和风格一致性。它不是 production handoff board。
+核心 artifact 是 `direction_board.html`，UI 名称为 **Director Workbench**：一个 Figma-like 审查 workbench，通过 Overview 和 Frames 视图审查节奏、视觉系统、逐帧意图、motion timeline 和评论。它不是 production handoff board。
 
 ## V1 Public Boundary / V1 公开边界
 
 - Static HTML/CSS/JS only. / 仅静态 HTML/CSS/JS。
-- Fixed director preview template before final `index.html`. / 最终 `index.html` 前使用固定导演预览模板。
+- Fixed Director Workbench template before final `index.html`. / 最终 `index.html` 前使用固定 Director Workbench 模板。
 - English is the default visible language; a global switch shows English or Chinese, never both side by side. / 默认显示英文；全局切换显示英文或中文，不中英并排。
 - Comments are weak side annotations on semantic targets; reviewers write in any language; export JSON for the next AI revision. / 评论是语义目标上的弱化侧边批注；审查者可用任意语言书写；导出 JSON 供下一个 AI 修改。
 - Image2Image, Image2GPT, and Image-to-Video are planning briefs only in v1; no provider execution is required. / v1 中 Image2Image、Image2GPT、Image-to-Video 只是规划 brief，不要求供应商执行。
@@ -68,8 +69,8 @@ Bypass only for small edits to an already-existing HyperFrames composition: typo
 2. Create/update `02_design_direction.md` with the aesthetic route.
 3. Create/update `03_critical_frame_plan.md` with sections, keyframes, locked main copy, assets, and motion intent.
 4. Ask short multiple-choice questions if sections, assets, or mainline are not confirmed.
-5. Create `direction_board.html` from `board/direction_board.template.html` using Pattern D in `references/visual-board-patterns.md`.
-6. Ensure the board contains director stages: cover, rhythm storyboard, layout previews, keyframe previews, motion before/after, style critique, side annotations.
+5. Create `direction_board.html` from `board/direction_board.template.html` using Pattern W in `references/visual-board-patterns.md`.
+6. Ensure the workbench contains: top bar, Overview view, Frames view, Visual System Lock, Motion Timeline, Review Gate Summary, and lightweight side annotations.
 7. Let the user or agent review the board visually. Comments should be exported as JSON and synced into `05_revision_plan.md`.
 8. Update Markdown artifacts after accepted board revisions.
 9. Mark `04_render_plan.md` ready only after the board is reviewed or explicitly waived.
@@ -79,8 +80,8 @@ Bypass only for small edits to an already-existing HyperFrames composition: typo
 2. 创建/更新 `02_design_direction.md`，记录审美路线。
 3. 创建/更新 `03_critical_frame_plan.md`，记录章节、关键帧、锁定主文字、素材和动效意图。
 4. 如果章节、素材或主线尚未确认，用简短选择题收敛。
-5. 使用 `board/direction_board.template.html` 和 `references/visual-board-patterns.md` 中的 Pattern D 创建 `direction_board.html`。
-6. 确保 board 包含导演阶段：封面、节奏分镜、版面预览、关键帧预览、运动前后状态、风格检查、侧边批注。
+5. 使用 `board/direction_board.template.html` 和 `references/visual-board-patterns.md` 中的 Pattern W 创建 `direction_board.html`。
+6. 确保 workbench 包含：顶栏、Overview 视图、Frames 视图、Visual System Lock、Motion Timeline、Review Gate Summary 和轻量侧边批注。
 7. 让用户或 agent 做视觉审查。评论应导出为 JSON，并同步进 `05_revision_plan.md`。
 8. 接受 board 修订后，同步更新 Markdown artifacts。
 9. 只有 board 已审查或明确豁免后，才把 `04_render_plan.md` 标记为 ready。
@@ -91,12 +92,12 @@ Bypass only for small edits to an already-existing HyperFrames composition: typo
 `direction_board.html` must include these stages in order:
 
 ```html
-<section data-stage="director-cover"></section>
-<section data-stage="rhythm-storyboard"></section>
-<section data-stage="layout-previews"></section>
-<section data-stage="keyframe-previews"></section>
-<section data-stage="motion-before-after"></section>
-<section data-stage="style-critique"></section>
+<header data-stage="director-workbench"></header>
+<section data-stage="overview-view"></section>
+<section data-stage="visual-system-lock"></section>
+<section data-stage="motion-timeline"></section>
+<section data-stage="review-gate-summary"></section>
+<section data-stage="frames-workbench"></section>
 <aside data-stage="annotation-layer"></aside>
 ```
 

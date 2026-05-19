@@ -34,12 +34,14 @@ const requiredFiles = [
 ];
 
 const requiredStages = [
+  "director-workbench",
+  "overview-view",
   "director-cover",
   "rhythm-storyboard",
-  "layout-previews",
-  "keyframe-previews",
-  "motion-before-after",
-  "style-critique",
+  "visual-system-lock",
+  "motion-timeline",
+  "review-gate-summary",
+  "frames-workbench",
   "annotation-layer"
 ];
 
@@ -49,7 +51,9 @@ const forbiddenDirectorStages = [
   "compact-production-handoff",
   "implementation-gate",
   "engineering-checklist",
-  "review-sync"
+  "review-sync",
+  "layout-previews",
+  "motion-before-after"
 ];
 
 const networkPatterns = [
@@ -85,13 +89,15 @@ for (const file of [
   }
   if (!html.includes("data-comment-target-id")) errors.push(`${file} missing semantic comment targets`);
   if (!html.includes('data-lang-switch="en"') || !html.includes('data-lang-switch="zh"')) errors.push(`${file} missing global language switch`);
+  if (!html.includes('data-view-switch="overview"') || !html.includes('data-view-switch="frames"')) errors.push(`${file} missing Overview/Frames view switch`);
+  if (!html.includes('data-frame-select="frame-01"')) errors.push(`${file} missing frame selector controls`);
   if (!html.includes('data-lang="en"')) errors.push(`${file} must default to English with body data-lang="en"`);
   for (const selector of [
     'data-comment-target-type="section"',
-    'data-comment-target-type="layout"',
+    'data-comment-target-type="system"',
     'data-comment-target-type="keyframe"',
     'data-comment-target-type="motion"',
-    'data-comment-target-type="critique"'
+    'data-comment-target-type="frame"'
   ]) {
     if (!html.includes(selector)) errors.push(`${file} missing ${selector}`);
   }
@@ -100,6 +106,9 @@ for (const file of [
   }
   for (const phrase of ["Compact Production Handoff", "Production Handoff", "Implementation Gate", "Engineering Checklist", "Review & Sync"]) {
     if (html.includes(phrase)) errors.push(`${file} contains forbidden director-view phrase: ${phrase}`);
+  }
+  for (const phrase of ["Layout Previews", "Motion Before And After", "Motion Before/After"]) {
+    if (html.includes(phrase)) errors.push(`${file} contains legacy workbench phrase: ${phrase}`);
   }
 }
 

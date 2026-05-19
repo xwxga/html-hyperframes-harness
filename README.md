@@ -4,6 +4,7 @@
 
 | Time / 时间 | Author / 作者 | Change / 变更 |
 |---|---|---|
+| 2026-05-19 22:31 | Sisyphus | Upgraded the review artifact wording to Director Workbench v1.5 with Overview/Frames views. / 将审查 artifact 文案升级为 Director Workbench v1.5，并加入 Overview/Frames 视图。 |
 | 2026-05-18 16:22 | Sisyphus | Reframed the public harness around director-first preview boards, language switching, and side annotations. |
 | 2026-05-18 00:00 | Sisyphus | Added root GitHub Pages landing page note and validator hardening follow-up. |
 | 2026-05-18 00:00 | Sisyphus | Added MIT license decision, public project docs, static validation, testing, and GitHub Pages demo references. |
@@ -14,7 +15,7 @@
 
 HTML HyperFrames Harness is a public, reusable, agent-facing pre-generation harness for HyperFrames videos.
 
-HTML HyperFrames Harness 是一个公开、可复用、给 Agent 使用的 HyperFrames 生成前 Harness。它用于在生成最终 HyperFrames `index.html` 之前，先通过导演版 `direction_board.html` 锁定节奏、镜头、版面、主文字、素材运动和风格一致性。
+HTML HyperFrames Harness 是一个公开、可复用、给 Agent 使用的 HyperFrames 生成前 Harness。它用于在生成最终 HyperFrames `index.html` 之前，先通过 **Director Workbench** 形态的 `direction_board.html` 锁定节奏、视觉系统、逐帧意图、素材运动和评论。
 
 It is a visual decision system, not a renderer or media-production pipeline.
 
@@ -25,12 +26,12 @@ The core rule is simple:
 核心规则很简单：
 
 - Markdown files are the source of truth.
-- `direction_board.html` is the director preview artifact and uses a fixed template.
+- `direction_board.html` is the Director Workbench artifact and uses a fixed template.
 - Review comments live in a weak side annotation rail, export JSON, and sync back to Markdown.
 - Final HyperFrames generation starts only after `04_render_plan.md` is marked ready.
 
 - Markdown 文件是事实源。
-- `direction_board.html` 是导演预览 artifact，并使用固定模板。
+- `direction_board.html` 是 Director Workbench artifact，并使用固定模板。
 - 审查评论位于弱化侧边批注栏，导出 JSON，并同步回 Markdown。
 - 只有 `04_render_plan.md` 标记 ready 后，才进入最终 HyperFrames 生成。
 
