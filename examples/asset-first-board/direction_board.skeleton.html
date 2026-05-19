@@ -1,124 +1,92 @@
 <!doctype html>
-<!-- Pattern A skeleton from references/visual-board-patterns.md. This is an asset-first visual Direction Board structure, not content to copy. -->
-<html lang="zh-CN">
+<!-- Pattern D skeleton from references/visual-board-patterns.md. Director-first preview structure, not production content. -->
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Asset-first Direction Board Skeleton / 素材优先方向板骨架</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --paper: #f5f1e7;
-      --ink: #241f1a;
-      --muted: #756a5f;
-      --line: #d8cdbd;
-      --accent: #c96442;
-      --panel: #fffaf0;
-    }
-
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: ui-serif, Georgia, "Times New Roman", serif;
-      line-height: 1.45;
-    }
-    main { width: min(1180px, calc(100vw - 32px)); margin: 0 auto; padding: 32px 0 64px; }
-    section { margin: 24px 0; padding: 22px; border: 1px solid var(--line); background: var(--panel); }
-    h1, h2, h3 { margin: 0 0 12px; line-height: 1.05; }
-    p { margin: 0 0 10px; color: var(--muted); }
-    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-    .card { min-height: 150px; border: 1px solid var(--line); padding: 14px; background: rgba(255,255,255,.45); }
-    .thumb { height: 120px; display: grid; place-items: center; border: 1px dashed var(--line); color: var(--muted); background: rgba(201,100,66,.08); }
-    .strip { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; }
-    .strip .card { min-width: 260px; }
-    .long-shot { max-height: 240px; overflow: auto; border: 1px solid var(--line); background: #fff; padding: 12px; }
-    .mini { font-size: 13px; color: var(--muted); }
-    [data-ready-state="blocked"] { border-color: #9b2d22; }
-    [data-ready-state="ready"] { border-color: #4d7c45; }
-  </style>
+  <title>Director Preview Board Skeleton</title>
+  <link rel="stylesheet" href="../../board/direction_board.css" />
 </head>
-<body>
-  <main>
-    <section data-stage="pre-board-convergence" data-confirmed="true">
-      <h1>Pre-board Convergence / Board 前收敛</h1>
-      <p>Record confirmed sections, assets, and mainline here before the visual board is generated.</p>
-      <p>在生成视觉板前，把已确认的章节、素材、主线记录在这里。</p>
-    </section>
+<body data-lang="en">
+  <header class="board-header" data-stage="director-cover" data-commentable="true" data-comment-target-type="stage" data-comment-target-id="skeleton.director-cover">
+    <nav class="topbar">
+      <p class="eyebrow" data-i18n="en">Director Preview Skeleton</p>
+      <p class="eyebrow" data-i18n="zh">导演预览骨架</p>
+      <div class="language-switch"><button type="button" data-lang-switch="en" aria-pressed="true">EN</button><button type="button" data-lang-switch="zh" aria-pressed="false">中文</button></div>
+    </nav>
+    <div class="cover-grid">
+      <div><h1 data-i18n="en">Replace this with the locked mainline.</h1><h1 data-i18n="zh">在这里替换为已锁定主线。</h1><p class="lede" data-i18n="en">Use visible mocks, not long handoff prose.</p><p class="lede" data-i18n="zh">使用可见 mock，不写长交接文本。</p></div>
+      <div class="rhythm-card"><span>00:00</span><span>Hook</span><span>Proof</span><span>Landing</span><span>00:30</span></div>
+    </div>
+  </header>
 
-    <section data-stage="visual-contact-sheet" data-ready-state="blocked">
-      <h2>Visual Contact Sheet / 视觉总览</h2>
-      <div class="grid">
-        <div class="card"><div class="thumb">Hero frame mock / 主视觉帧</div><p>Mainline / 主线：...</p></div>
-        <div class="card"><div class="thumb">Must-use asset / 必用素材</div><p>Section chips / 章节标签：...</p></div>
-        <div class="card"><div class="thumb">Design route / 视觉路线</div><p>Ready state / 状态：blocked until assets load.</p></div>
+  <main class="board-shell">
+    <div class="preview-stack">
+      <section class="panel" data-stage="rhythm-storyboard" data-commentable="true" data-comment-target-type="stage" data-comment-target-id="skeleton.rhythm-storyboard">
+        <p class="eyebrow" data-i18n="en">01 / Rhythm Storyboard</p><p class="eyebrow" data-i18n="zh">01 / 节奏分镜</p>
+        <h2 data-i18n="en">Section + keyframe sequence</h2><h2 data-i18n="zh">章节 + 关键帧序列</h2>
+        <div class="storyline">
+          <article data-commentable="true" data-comment-target-type="section" data-comment-target-id="section-01" data-section-id="section-01" data-page-id="page-01"><span class="badge">01</span><h3>Hook</h3><p>Opening beat.</p></article>
+          <article data-commentable="true" data-comment-target-type="keyframe" data-comment-target-id="page-01.hero" data-critical-frame="hero" data-page-id="page-01"><span class="badge">KF</span><h3>Hero</h3><p>Strongest frame.</p></article>
+          <article data-commentable="true" data-comment-target-type="section" data-comment-target-id="section-02" data-section-id="section-02" data-page-id="page-02"><span class="badge">02</span><h3>Proof</h3><p>Evidence beat.</p></article>
+          <article data-commentable="true" data-comment-target-type="section" data-comment-target-id="section-03" data-section-id="section-03" data-page-id="page-03"><span class="badge">03</span><h3>Landing</h3><p>End beat.</p></article>
+        </div>
+      </section>
+
+      <section class="panel" data-stage="layout-previews">
+        <p class="eyebrow" data-i18n="en">02 / Layout Previews</p><p class="eyebrow" data-i18n="zh">02 / 版面预览</p>
+        <h2 data-i18n="en">Visual mock + locked copy</h2><h2 data-i18n="zh">视觉 mock + 锁定主文字</h2>
+        <div class="layout-grid">
+          <article class="layout-card" data-commentable="true" data-comment-target-type="layout" data-comment-target-id="layout-01" data-page-id="page-01" data-aspect-mode="horizontal"><div class="mock-frame gradient-a"><strong>Main copy</strong></div><p>Primary content and asset role.</p></article>
+          <article class="layout-card" data-commentable="true" data-comment-target-type="layout" data-comment-target-id="layout-02" data-page-id="page-02" data-aspect-mode="horizontal"><div class="mock-frame gradient-b"><strong>Proof copy</strong></div><p>Primary content and motion intent.</p></article>
+          <article class="layout-card" data-commentable="true" data-comment-target-type="layout" data-comment-target-id="layout-03" data-page-id="page-03" data-aspect-mode="vertical"><div class="mock-frame vertical gradient-c"><strong>End copy</strong></div><p>Vertical-safe ending layout.</p></article>
+        </div>
+      </section>
+
+      <section class="panel" data-stage="keyframe-previews">
+        <p class="eyebrow" data-i18n="en">03 / Keyframe Previews</p><p class="eyebrow" data-i18n="zh">03 / 关键帧预览</p>
+        <div class="frame-grid">
+          <section class="frame-card" data-commentable="true" data-comment-target-type="keyframe" data-comment-target-id="page-01.entry" data-critical-frame="entry" data-page-id="page-01"><div class="shot gradient-a">Entry</div></section>
+          <section class="frame-card" data-commentable="true" data-comment-target-type="keyframe" data-comment-target-id="page-01.hero" data-critical-frame="hero" data-page-id="page-01"><div class="shot gradient-b">Hero</div></section>
+          <section class="frame-card" data-commentable="true" data-comment-target-type="keyframe" data-comment-target-id="page-01.transition" data-critical-frame="transition" data-page-id="page-01"><div class="shot gradient-c">Cut</div></section>
+        </div>
+      </section>
+
+      <section class="panel" data-stage="motion-before-after" data-aspect-modes="horizontal,vertical">
+        <p class="eyebrow" data-i18n="en">04 / Motion Before And After</p><p class="eyebrow" data-i18n="zh">04 / 运动前后状态</p>
+        <div class="motion-grid">
+          <article data-commentable="true" data-comment-target-type="motion" data-comment-target-id="asset-01.motion" data-asset-id="asset-01" data-aspect-mode="horizontal"><h3>asset-01</h3><div class="before-after"><div>Before</div><div>After</div></div></article>
+          <article data-commentable="true" data-comment-target-type="motion" data-comment-target-id="asset-02.motion" data-asset-id="asset-02" data-aspect-mode="vertical"><h3>asset-02</h3><div class="before-after"><div>Before</div><div>After</div></div></article>
+        </div>
+      </section>
+
+      <section class="panel" data-stage="style-critique">
+        <p class="eyebrow" data-i18n="en">05 / Style Critique</p><p class="eyebrow" data-i18n="zh">05 / 风格检查</p>
+        <div class="critique-grid">
+          <article data-commentable="true" data-comment-target-type="critique" data-comment-target-id="critique.layout-01"><h3>layout-01</h3><p>Unity, rhythm, density, motion consistency.</p></article>
+          <article data-commentable="true" data-comment-target-type="critique" data-comment-target-id="critique.layout-02"><h3>layout-02</h3><p>Unity, rhythm, density, motion consistency.</p></article>
+          <article data-commentable="true" data-comment-target-type="critique" data-comment-target-id="critique.layout-03"><h3>layout-03</h3><p>Unity, rhythm, density, motion consistency.</p></article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="annotation-rail" data-stage="annotation-layer">
+      <div class="rail-sticky">
+        <p class="eyebrow" data-i18n="en">Side Annotations</p><p class="eyebrow" data-i18n="zh">侧边批注</p>
+        <form id="comment-form" class="comment-form">
+          <label>Selected target <input id="comment-target" readonly /></label>
+          <label>Scope <select id="comment-scope"><option value="layout">layout</option><option value="copy">copy</option><option value="motion">motion</option><option value="style">style</option><option value="mainline">mainline</option></select></label>
+          <label>Priority <select id="comment-priority"><option value="medium">medium</option><option value="high">high</option><option value="low">low</option></select></label>
+          <label>Comment <textarea id="comment-text"></textarea></label>
+          <div class="button-row"><button type="submit">Add</button><button type="button" id="export-comments">Export JSON</button><button type="button" id="clear-comments">Clear</button></div>
+        </form>
+        <label class="import-box">Import JSON <textarea id="import-comments"></textarea></label>
+        <button type="button" id="load-comments">Load pasted JSON</button>
+        <pre id="comment-export"></pre>
+        <ol id="comment-list"></ol>
       </div>
-    </section>
-
-    <section data-stage="asset-wall">
-      <h2>Asset Wall / 素材墙</h2>
-      <div class="grid">
-        <article class="card" data-asset-id="asset-01" data-asset-role="hero-evidence" data-asset-status="must-use">
-          <div class="thumb">asset-01 thumbnail</div>
-          <h3>Asset 01 / 素材 01</h3>
-          <p>Role, crop, section assignment, risk.</p>
-        </article>
-        <article class="card" data-asset-id="asset-02" data-asset-role="context" data-asset-status="optional">
-          <div class="thumb">asset-02 thumbnail</div>
-          <h3>Asset 02 / 素材 02</h3>
-          <p>Role, crop, section assignment, risk.</p>
-        </article>
-        <article class="card" data-asset-id="asset-03" data-asset-role="long-webpage" data-asset-status="reference-only">
-          <div data-long-screenshot="true" class="long-shot">
-            Long screenshot placeholder. Keep this manually scrollable; never auto-scroll.
-            <div style="height: 520px"></div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section data-stage="section-storyboard">
-      <h2>Section Storyboard / 章节分镜</h2>
-      <div class="strip">
-        <article class="card" data-section-id="section-01" data-page-id="page-01" data-page-state="ready">
-          <h3>01 / Hook</h3><div class="thumb">hero thumb</div><p>Assigned assets + transition anchor.</p>
-        </article>
-        <article class="card" data-section-id="section-02" data-page-id="page-02" data-page-state="blocked">
-          <h3>02 / Proof</h3><div class="thumb">hero thumb</div><p>Assigned assets + unresolved risk.</p>
-        </article>
-      </div>
-    </section>
-
-    <section data-stage="critical-frame-mockups">
-      <h2>Critical Frame Mockups / 关键帧 Mockup</h2>
-      <div class="grid">
-        <section class="card" data-critical-frame="entry" data-page-id="page-01"><h3>Entry / 进入帧</h3><div class="thumb">entry frame</div></section>
-        <section class="card" data-critical-frame="hero" data-page-id="page-01"><h3>Hero / 主视觉帧</h3><div class="thumb">hero frame</div></section>
-        <section class="card" data-critical-frame="transition" data-page-id="page-01"><h3>Transition / 转场帧</h3><div class="thumb">transition frame</div></section>
-      </div>
-    </section>
-
-    <section data-stage="visual-route" data-primary-design="docs/design-router/design-systems/core/.../DESIGN.md">
-      <h2>Visual Route / 视觉路线</h2>
-      <p>Design Router chooses aesthetic language. Pattern A keeps this board asset-first.</p>
-      <p>Design Router 选择审美语言；Pattern A 保持 board 素材优先。</p>
-    </section>
-
-    <section data-stage="motion-continuity-strip">
-      <h2>Motion & Continuity Strip / 动效与连续性条</h2>
-      <div class="strip"><div class="card">Anchor A → Anchor B</div><div class="card">Asset motion intent</div><div class="card">Text motion intent</div></div>
-    </section>
-
-    <section data-stage="compact-production-handoff" data-ready-state="blocked">
-      <h2>Compact Production Handoff / 小型生产交接</h2>
-      <p class="mini">Keep this small: ready state, missing assets, unresolved visual risks, Markdown sync, `04_render_plan.md` handoff state.</p>
-    </section>
-
-    <section data-stage="review-sync" data-sync-state="pending">
-      <h2>Review & Sync / 审查与同步</h2>
-      <p>Record user/agent review evidence and Markdown sync status here.</p>
-    </section>
+    </aside>
   </main>
+  <script src="../../board/comment-layer.js"></script>
 </body>
 </html>
