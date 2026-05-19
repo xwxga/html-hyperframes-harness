@@ -1,92 +1,27 @@
 <!doctype html>
-<!-- Pattern D skeleton from references/visual-board-patterns.md. Director-first preview structure, not production content. -->
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Director Preview Board Skeleton</title>
-  <link rel="stylesheet" href="../../board/direction_board.css" />
-</head>
-<body data-lang="en">
-  <header class="board-header" data-stage="director-cover" data-commentable="true" data-comment-target-type="stage" data-comment-target-id="skeleton.director-cover">
-    <nav class="topbar">
-      <p class="eyebrow" data-i18n="en">Director Preview Skeleton</p>
-      <p class="eyebrow" data-i18n="zh">导演预览骨架</p>
-      <div class="language-switch"><button type="button" data-lang-switch="en" aria-pressed="true">EN</button><button type="button" data-lang-switch="zh" aria-pressed="false">中文</button></div>
-    </nav>
-    <div class="cover-grid">
-      <div><h1 data-i18n="en">Replace this with the locked mainline.</h1><h1 data-i18n="zh">在这里替换为已锁定主线。</h1><p class="lede" data-i18n="en">Use visible mocks, not long handoff prose.</p><p class="lede" data-i18n="zh">使用可见 mock，不写长交接文本。</p></div>
-      <div class="rhythm-card"><span>00:00</span><span>Hook</span><span>Proof</span><span>Landing</span><span>00:30</span></div>
-    </div>
-  </header>
-
-  <main class="board-shell">
-    <div class="preview-stack">
-      <section class="panel" data-stage="rhythm-storyboard" data-commentable="true" data-comment-target-type="stage" data-comment-target-id="skeleton.rhythm-storyboard">
-        <p class="eyebrow" data-i18n="en">01 / Rhythm Storyboard</p><p class="eyebrow" data-i18n="zh">01 / 节奏分镜</p>
-        <h2 data-i18n="en">Section + keyframe sequence</h2><h2 data-i18n="zh">章节 + 关键帧序列</h2>
-        <div class="storyline">
-          <article data-commentable="true" data-comment-target-type="section" data-comment-target-id="section-01" data-section-id="section-01" data-page-id="page-01"><span class="badge">01</span><h3>Hook</h3><p>Opening beat.</p></article>
-          <article data-commentable="true" data-comment-target-type="keyframe" data-comment-target-id="page-01.hero" data-critical-frame="hero" data-page-id="page-01"><span class="badge">KF</span><h3>Hero</h3><p>Strongest frame.</p></article>
-          <article data-commentable="true" data-comment-target-type="section" data-comment-target-id="section-02" data-section-id="section-02" data-page-id="page-02"><span class="badge">02</span><h3>Proof</h3><p>Evidence beat.</p></article>
-          <article data-commentable="true" data-comment-target-type="section" data-comment-target-id="section-03" data-section-id="section-03" data-page-id="page-03"><span class="badge">03</span><h3>Landing</h3><p>End beat.</p></article>
-        </div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Director Workbench Skeleton</title>
+    <link rel="stylesheet" href="../../board/direction_board.css" />
+  </head>
+  <body data-lang="en" data-active-view="overview" data-active-frame="frame-01">
+    <header class="workbench-topbar" data-stage="director-workbench" data-commentable="true" data-comment-target-type="stage" data-comment-target-id="skeleton.topbar">
+      <div class="brand-lockup"><span class="figma-dot"></span><div><p class="eyebrow">Skeleton</p><h1>Director Workbench</h1></div></div>
+      <div class="topbar-controls"><span class="status-pill">Status: draft</span><div class="segmented"><button type="button" data-view-switch="overview" aria-pressed="true">Overview</button><button type="button" data-view-switch="frames" aria-pressed="false">Frames</button></div><div class="segmented"><button type="button" data-lang-switch="en" aria-pressed="true">EN</button><button type="button" data-lang-switch="zh" aria-pressed="false">中文</button></div></div>
+    </header>
+    <main class="workbench-shell">
+      <section class="workbench-view is-active" data-view="overview" data-stage="overview-view">
+        <section class="overview-hero" data-stage="director-cover" data-commentable="true" data-comment-target-type="stage" data-comment-target-id="skeleton.cover"><div class="canvas-card cover-artboard"><div class="safe-area"><h2 data-i18n="en">Locked mainline.</h2><h2 data-i18n="zh">锁定主线。</h2></div></div><aside class="inspector-card"><h3>Project</h3><dl><dt>Artifact</dt><dd>direction_board.html</dd></dl></aside></section>
+        <section class="panel" data-stage="rhythm-storyboard"><div class="section-heading"><p class="eyebrow">01</p><h2>Rhythm Storyboard</h2></div><div class="story-strip"><article data-commentable="true" data-comment-target-type="section" data-comment-target-id="section-01"><strong>Hook</strong></article><article data-commentable="true" data-comment-target-type="keyframe" data-comment-target-id="page-01.hero"><strong>Hero</strong></article><article data-commentable="true" data-comment-target-type="section" data-comment-target-id="section-02"><strong>Proof</strong></article><article data-commentable="true" data-comment-target-type="section" data-comment-target-id="section-03"><strong>Landing</strong></article></div></section>
+        <section class="panel" data-stage="visual-system-lock"><div class="section-heading"><p class="eyebrow">02</p><h2>Visual System Lock</h2></div><div class="system-grid"><article data-commentable="true" data-comment-target-type="system" data-comment-target-id="system.artboard">Artboard</article><article data-commentable="true" data-comment-target-type="system" data-comment-target-id="system.type">Type scale</article><article data-commentable="true" data-comment-target-type="system" data-comment-target-id="system.components">Components</article></div></section>
+        <section class="panel" data-stage="motion-timeline"><div class="section-heading"><p class="eyebrow">03</p><h2>Motion Timeline</h2></div><div class="timeline-strip"><div data-commentable="true" data-comment-target-type="motion" data-comment-target-id="motion.entry">Entry</div><div data-commentable="true" data-comment-target-type="motion" data-comment-target-id="motion.hero">Hero</div><div data-commentable="true" data-comment-target-type="motion" data-comment-target-id="motion.proof">Proof</div><div data-commentable="true" data-comment-target-type="motion" data-comment-target-id="motion.hold">Hold</div></div></section>
+        <section class="panel review-summary" data-stage="review-gate-summary"><div class="section-heading"><p class="eyebrow">04</p><h2>Review Gate Summary</h2></div><div class="gate-grid"><span>Ready to review</span></div></section>
       </section>
-
-      <section class="panel" data-stage="layout-previews">
-        <p class="eyebrow" data-i18n="en">02 / Layout Previews</p><p class="eyebrow" data-i18n="zh">02 / 版面预览</p>
-        <h2 data-i18n="en">Visual mock + locked copy</h2><h2 data-i18n="zh">视觉 mock + 锁定主文字</h2>
-        <div class="layout-grid">
-          <article class="layout-card" data-commentable="true" data-comment-target-type="layout" data-comment-target-id="layout-01" data-page-id="page-01" data-aspect-mode="horizontal"><div class="mock-frame gradient-a"><strong>Main copy</strong></div><p>Primary content and asset role.</p></article>
-          <article class="layout-card" data-commentable="true" data-comment-target-type="layout" data-comment-target-id="layout-02" data-page-id="page-02" data-aspect-mode="horizontal"><div class="mock-frame gradient-b"><strong>Proof copy</strong></div><p>Primary content and motion intent.</p></article>
-          <article class="layout-card" data-commentable="true" data-comment-target-type="layout" data-comment-target-id="layout-03" data-page-id="page-03" data-aspect-mode="vertical"><div class="mock-frame vertical gradient-c"><strong>End copy</strong></div><p>Vertical-safe ending layout.</p></article>
-        </div>
-      </section>
-
-      <section class="panel" data-stage="keyframe-previews">
-        <p class="eyebrow" data-i18n="en">03 / Keyframe Previews</p><p class="eyebrow" data-i18n="zh">03 / 关键帧预览</p>
-        <div class="frame-grid">
-          <section class="frame-card" data-commentable="true" data-comment-target-type="keyframe" data-comment-target-id="page-01.entry" data-critical-frame="entry" data-page-id="page-01"><div class="shot gradient-a">Entry</div></section>
-          <section class="frame-card" data-commentable="true" data-comment-target-type="keyframe" data-comment-target-id="page-01.hero" data-critical-frame="hero" data-page-id="page-01"><div class="shot gradient-b">Hero</div></section>
-          <section class="frame-card" data-commentable="true" data-comment-target-type="keyframe" data-comment-target-id="page-01.transition" data-critical-frame="transition" data-page-id="page-01"><div class="shot gradient-c">Cut</div></section>
-        </div>
-      </section>
-
-      <section class="panel" data-stage="motion-before-after" data-aspect-modes="horizontal,vertical">
-        <p class="eyebrow" data-i18n="en">04 / Motion Before And After</p><p class="eyebrow" data-i18n="zh">04 / 运动前后状态</p>
-        <div class="motion-grid">
-          <article data-commentable="true" data-comment-target-type="motion" data-comment-target-id="asset-01.motion" data-asset-id="asset-01" data-aspect-mode="horizontal"><h3>asset-01</h3><div class="before-after"><div>Before</div><div>After</div></div></article>
-          <article data-commentable="true" data-comment-target-type="motion" data-comment-target-id="asset-02.motion" data-asset-id="asset-02" data-aspect-mode="vertical"><h3>asset-02</h3><div class="before-after"><div>Before</div><div>After</div></div></article>
-        </div>
-      </section>
-
-      <section class="panel" data-stage="style-critique">
-        <p class="eyebrow" data-i18n="en">05 / Style Critique</p><p class="eyebrow" data-i18n="zh">05 / 风格检查</p>
-        <div class="critique-grid">
-          <article data-commentable="true" data-comment-target-type="critique" data-comment-target-id="critique.layout-01"><h3>layout-01</h3><p>Unity, rhythm, density, motion consistency.</p></article>
-          <article data-commentable="true" data-comment-target-type="critique" data-comment-target-id="critique.layout-02"><h3>layout-02</h3><p>Unity, rhythm, density, motion consistency.</p></article>
-          <article data-commentable="true" data-comment-target-type="critique" data-comment-target-id="critique.layout-03"><h3>layout-03</h3><p>Unity, rhythm, density, motion consistency.</p></article>
-        </div>
-      </section>
-    </div>
-
-    <aside class="annotation-rail" data-stage="annotation-layer">
-      <div class="rail-sticky">
-        <p class="eyebrow" data-i18n="en">Side Annotations</p><p class="eyebrow" data-i18n="zh">侧边批注</p>
-        <form id="comment-form" class="comment-form">
-          <label>Selected target <input id="comment-target" readonly /></label>
-          <label>Scope <select id="comment-scope"><option value="layout">layout</option><option value="copy">copy</option><option value="motion">motion</option><option value="style">style</option><option value="mainline">mainline</option></select></label>
-          <label>Priority <select id="comment-priority"><option value="medium">medium</option><option value="high">high</option><option value="low">low</option></select></label>
-          <label>Comment <textarea id="comment-text"></textarea></label>
-          <div class="button-row"><button type="submit">Add</button><button type="button" id="export-comments">Export JSON</button><button type="button" id="clear-comments">Clear</button></div>
-        </form>
-        <label class="import-box">Import JSON <textarea id="import-comments"></textarea></label>
-        <button type="button" id="load-comments">Load pasted JSON</button>
-        <pre id="comment-export"></pre>
-        <ol id="comment-list"></ol>
-      </div>
-    </aside>
-  </main>
-  <script src="../../board/comment-layer.js"></script>
-</body>
+      <section class="workbench-view frames-workbench" data-view="frames" data-stage="frames-workbench"><aside class="frame-list"><button type="button" data-frame-select="frame-01" aria-pressed="true"><span>01</span><strong>Hook</strong></button></aside><section class="artboard-stage"><div class="artboard active-frame" data-frame="frame-01" data-commentable="true" data-comment-target-type="frame" data-comment-target-id="frame-01"><div class="safe-area"><h2>Frame</h2></div></div></section><aside class="frame-inspector"><dl><dt>Selected</dt><dd id="selected-frame-label">frame-01</dd><dt>Motion</dt><dd id="selected-frame-motion">Describe intent.</dd></dl></aside><footer class="frame-timeline"><button type="button" data-frame-select="frame-01">00:00 Hook</button></footer></section>
+      <aside class="annotation-rail" data-stage="annotation-layer"><details open><summary>Comments</summary><form id="comment-form" class="comment-form"><label>Selected target <input id="comment-target" readonly /></label><label>Scope <select id="comment-scope"><option value="layout">layout</option><option value="copy">copy</option><option value="motion">motion</option><option value="style">style</option><option value="mainline">mainline</option></select></label><label>Priority <select id="comment-priority"><option value="medium">medium</option><option value="high">high</option><option value="low">low</option></select></label><label>Comment <textarea id="comment-text"></textarea></label><div class="button-row"><button type="submit">Add</button><button type="button" id="export-comments">Export JSON</button><button type="button" id="clear-comments">Clear</button></div></form><label class="import-box">Import JSON <textarea id="import-comments"></textarea></label><button type="button" id="load-comments">Load pasted JSON</button><pre id="comment-export"></pre><ol id="comment-list"></ol></details></aside>
+    </main>
+    <script src="../../board/comment-layer.js"></script>
+  </body>
 </html>
