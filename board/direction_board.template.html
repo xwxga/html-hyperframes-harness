@@ -3,153 +3,135 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>HyperFrames Director Preview Board</title>
+    <title>Director Workbench</title>
     <link rel="stylesheet" href="./direction_board.css" />
   </head>
-  <body data-lang="en">
-    <header class="board-header" data-stage="director-cover" data-commentable="true" data-comment-target-type="stage" data-comment-target-id="board.director-cover">
-      <nav class="topbar" aria-label="Language switch">
-        <p class="eyebrow" data-i18n="en">HyperFrames Director Preview</p>
-        <p class="eyebrow" data-i18n="zh">HyperFrames 导演预览</p>
-        <div class="language-switch" role="group" aria-label="Language">
+  <body data-lang="en" data-active-view="overview" data-active-frame="frame-01">
+    <header class="workbench-topbar" data-stage="director-workbench" data-commentable="true" data-comment-target-type="stage" data-comment-target-id="workbench.topbar">
+      <div class="brand-lockup">
+        <span class="figma-dot"></span>
+        <div>
+          <p class="eyebrow" data-i18n="en">HyperFrames Harness</p>
+          <p class="eyebrow" data-i18n="zh">HyperFrames Harness</p>
+          <h1>Director Workbench</h1>
+        </div>
+      </div>
+      <div class="topbar-controls">
+        <span class="status-pill" data-i18n="en">Status: direction review</span>
+        <span class="status-pill" data-i18n="zh">状态：方向审查</span>
+        <div class="segmented" role="group" aria-label="Workbench view">
+          <button type="button" data-view-switch="overview" aria-pressed="true">Overview</button>
+          <button type="button" data-view-switch="frames" aria-pressed="false">Frames</button>
+        </div>
+        <div class="segmented" role="group" aria-label="Language">
           <button type="button" data-lang-switch="en" aria-pressed="true">EN</button>
           <button type="button" data-lang-switch="zh" aria-pressed="false">中文</button>
-        </div>
-      </nav>
-      <div class="cover-grid">
-        <div>
-          <h1 data-i18n="en">Direction before generation.</h1>
-          <h1 data-i18n="zh">先定方向，再生成。</h1>
-          <p class="lede" data-i18n="en">A director-facing review board for rhythm, shots, layout, locked main copy, asset motion, and style consistency before final HyperFrames <code>index.html</code>.</p>
-          <p class="lede" data-i18n="zh">这是最终 HyperFrames <code>index.html</code> 前的导演审片板，用来检查节奏、镜头、版面、已锁定主文字、素材运动与风格一致性。</p>
-        </div>
-        <div class="rhythm-card">
-          <span>00:00</span><span>Hook</span><span>Proof</span><span>Landing</span><span>00:30</span>
         </div>
       </div>
     </header>
 
-    <main class="board-shell">
-      <div class="preview-stack">
-        <section class="panel" data-stage="rhythm-storyboard" data-commentable="true" data-comment-target-type="stage" data-comment-target-id="board.rhythm-storyboard">
-          <p class="eyebrow" data-i18n="en">01 / Rhythm Storyboard</p>
-          <p class="eyebrow" data-i18n="zh">01 / 节奏分镜</p>
-          <h2 data-i18n="en">Section and keyframe sequence</h2>
-          <h2 data-i18n="zh">章节与关键帧混合序列</h2>
-          <div class="storyline">
-            <article data-commentable="true" data-comment-target-type="section" data-comment-target-id="section-01" data-section-id="section-01" data-page-id="page-01" data-page-state="ready">
-              <span class="badge">01</span>
-              <h3 data-i18n="en">Opening beat</h3>
-              <h3 data-i18n="zh">开场段</h3>
-              <p data-i18n="en">Main hook, hero asset, first contrast.</p>
-              <p data-i18n="zh">主 hook、主视觉素材、第一组反差。</p>
-            </article>
-            <article data-commentable="true" data-comment-target-type="keyframe" data-comment-target-id="page-01.hero" data-critical-frame="hero" data-page-id="page-01">
-              <span class="badge">KF</span>
-              <h3 data-i18n="en">Hero lock</h3>
-              <h3 data-i18n="zh">主视觉锁定</h3>
-              <p data-i18n="en">Title and subject settle into the strongest frame.</p>
-              <p data-i18n="zh">标题和主体落到最强画面。</p>
-            </article>
-            <article data-commentable="true" data-comment-target-type="section" data-comment-target-id="section-02" data-section-id="section-02" data-page-id="page-02" data-page-state="ready">
-              <span class="badge">02</span>
-              <h3 data-i18n="en">Proof beat</h3>
-              <h3 data-i18n="zh">证明段</h3>
-              <p data-i18n="en">Evidence, comparison, detail reveal.</p>
-              <p data-i18n="zh">证据、对比、细节揭示。</p>
-            </article>
-            <article data-commentable="true" data-comment-target-type="section" data-comment-target-id="section-03" data-section-id="section-03" data-page-id="page-03" data-page-state="ready">
-              <span class="badge">03</span>
-              <h3 data-i18n="en">Landing beat</h3>
-              <h3 data-i18n="zh">落点段</h3>
-              <p data-i18n="en">Final claim, pause, end frame.</p>
-              <p data-i18n="zh">最终论点、停顿、结束帧。</p>
-            </article>
+    <main class="workbench-shell">
+      <section class="workbench-view is-active" data-view="overview" data-stage="overview-view">
+        <section class="overview-hero" data-stage="director-cover" data-commentable="true" data-comment-target-type="stage" data-comment-target-id="overview.director-cover">
+          <div class="canvas-card cover-artboard">
+            <div class="artboard-label">Cover / 9:16</div>
+            <div class="safe-area">
+              <p class="eyebrow" data-i18n="en">Director intent</p>
+              <p class="eyebrow" data-i18n="zh">导演意图</p>
+              <h2 data-i18n="en">Direction before generation.</h2>
+              <h2 data-i18n="zh">先定方向，再生成。</h2>
+              <p data-i18n="en">One static workbench locks rhythm, visual system, frame intent, and comments before final HyperFrames <code>index.html</code>.</p>
+              <p data-i18n="zh">用一个静态 workbench 在最终 HyperFrames <code>index.html</code> 前锁定节奏、视觉系统、逐帧意图和评论。</p>
+            </div>
+          </div>
+          <aside class="inspector-card">
+            <h3>Project</h3>
+            <dl>
+              <dt>Name</dt><dd>Director Workbench</dd>
+              <dt>Artifact</dt><dd>direction_board.html</dd>
+              <dt>Boundary</dt><dd>Pre-generation review only</dd>
+            </dl>
+          </aside>
+        </section>
+
+        <section class="panel" data-stage="rhythm-storyboard" data-commentable="true" data-comment-target-type="stage" data-comment-target-id="overview.rhythm-storyboard">
+          <div class="section-heading"><p class="eyebrow">01</p><h2 data-i18n="en">Rhythm Storyboard</h2><h2 data-i18n="zh">节奏分镜</h2></div>
+          <div class="story-strip">
+            <article data-commentable="true" data-comment-target-type="section" data-comment-target-id="section-01" data-section-id="section-01" data-page-id="page-01"><span>00:00</span><strong>Hook</strong><p data-i18n="en">Open with the highest-friction visual.</p><p data-i18n="zh">用阻力最大的画面开场。</p></article>
+            <article data-commentable="true" data-comment-target-type="keyframe" data-comment-target-id="page-01.hero" data-critical-frame="hero" data-page-id="page-01"><span>00:06</span><strong>Hero</strong><p data-i18n="en">Main copy locks to the subject.</p><p data-i18n="zh">主文字锁定到主体。</p></article>
+            <article data-commentable="true" data-comment-target-type="section" data-comment-target-id="section-02" data-section-id="section-02" data-page-id="page-02"><span>00:14</span><strong>Proof</strong><p data-i18n="en">Evidence becomes readable.</p><p data-i18n="zh">证据变得可读。</p></article>
+            <article data-commentable="true" data-comment-target-type="section" data-comment-target-id="section-03" data-section-id="section-03" data-page-id="page-03"><span>00:26</span><strong>Landing</strong><p data-i18n="en">End on one calm claim.</p><p data-i18n="zh">停在一句稳定承诺。</p></article>
           </div>
         </section>
 
-        <section class="panel" data-stage="layout-previews">
-          <p class="eyebrow" data-i18n="en">02 / Layout Previews</p>
-          <p class="eyebrow" data-i18n="zh">02 / 版面预览</p>
-          <h2 data-i18n="en">Every layout has a visual mock and locked copy</h2>
-          <h2 data-i18n="zh">每个版面都有视觉 mock 和锁定主文字</h2>
-          <div class="layout-grid">
-            <article class="layout-card" data-commentable="true" data-comment-target-type="layout" data-comment-target-id="layout-01" data-page-id="page-01" data-aspect-mode="horizontal">
-              <div class="mock-frame gradient-a"><strong data-i18n="en">Locked main copy</strong><strong data-i18n="zh">已锁定主文字</strong></div>
-              <h3 data-i18n="en">Hero claim layout</h3>
-              <h3 data-i18n="zh">主论点版面</h3>
-              <p data-i18n="en">Primary content: title, hero asset, small evidence tag.</p>
-              <p data-i18n="zh">主要内容：标题、主视觉素材、小证据标签。</p>
-              <p class="mini" data-i18n="en">Asset role: hero subject. Motion: slow push-in.</p>
-              <p class="mini" data-i18n="zh">素材角色：主主体。运动：慢速推进。</p>
-            </article>
-            <article class="layout-card" data-commentable="true" data-comment-target-type="layout" data-comment-target-id="layout-02" data-page-id="page-02" data-aspect-mode="horizontal">
-              <div class="mock-frame gradient-b"><strong data-i18n="en">Proof copy</strong><strong data-i18n="zh">证明文字</strong></div>
-              <h3 data-i18n="en">Evidence split layout</h3>
-              <h3 data-i18n="zh">证据分屏版面</h3>
-              <p data-i18n="en">Primary content: before/after evidence and compact note.</p>
-              <p data-i18n="zh">主要内容：前后对比证据和短说明。</p>
-              <p class="mini" data-i18n="en">Asset role: proof detail. Motion: wipe reveal.</p>
-              <p class="mini" data-i18n="zh">素材角色：证明细节。运动：擦除揭示。</p>
-            </article>
-            <article class="layout-card" data-commentable="true" data-comment-target-type="layout" data-comment-target-id="layout-03" data-page-id="page-03" data-aspect-mode="vertical">
-              <div class="mock-frame vertical gradient-c"><strong data-i18n="en">End copy</strong><strong data-i18n="zh">结尾文字</strong></div>
-              <h3 data-i18n="en">Vertical landing layout</h3>
-              <h3 data-i18n="zh">竖版落点版面</h3>
-              <p data-i18n="en">Primary content: final sentence and held visual.</p>
-              <p data-i18n="zh">主要内容：最终句和停留画面。</p>
-              <p class="mini" data-i18n="en">Asset role: texture field. Motion: hold and fade.</p>
-              <p class="mini" data-i18n="zh">素材角色：氛围纹理。运动：停留并淡出。</p>
-            </article>
+        <section class="panel" data-stage="visual-system-lock" data-commentable="true" data-comment-target-type="system" data-comment-target-id="overview.visual-system-lock">
+          <div class="section-heading"><p class="eyebrow">02</p><h2>Visual System Lock</h2></div>
+          <div class="system-grid">
+            <article data-commentable="true" data-comment-target-type="system" data-comment-target-id="system.artboard"><span class="mini-label">Artboard</span><div class="system-swatch artboard-mini"><div></div></div><p>9:16 center artboard, soft grid canvas, explicit safe area.</p></article>
+            <article data-commentable="true" data-comment-target-type="system" data-comment-target-id="system.type"><span class="mini-label">Type scale</span><div class="type-stack"><b>Title 64</b><strong>Frame title 28</strong><small>Inspector label 12</small></div><p>Large locked copy, compact labels, no dense bilingual pairing.</p></article>
+            <article data-commentable="true" data-comment-target-type="system" data-comment-target-id="system.components"><span class="mini-label">Components</span><div class="component-stack"><span>Source card</span><span>Selection outline</span><span>Timeline chip</span></div><p>Reusable cards, pills, outlines, inspector fields.</p></article>
           </div>
         </section>
 
-        <section class="panel" data-stage="keyframe-previews">
-          <p class="eyebrow" data-i18n="en">03 / Keyframe Previews</p>
-          <p class="eyebrow" data-i18n="zh">03 / 关键帧预览</p>
-          <h2 data-i18n="en">Entry, hero, transition states</h2>
-          <h2 data-i18n="zh">进入、主视觉、转场状态</h2>
-          <div class="frame-grid">
-            <section class="frame-card" data-commentable="true" data-comment-target-type="keyframe" data-comment-target-id="page-01.entry" data-critical-frame="entry" data-page-id="page-01"><div class="shot gradient-a">Entry</div><p data-i18n="en">Copy enters before asset settles.</p><p data-i18n="zh">文字先进入，素材随后落定。</p></section>
-            <section class="frame-card" data-commentable="true" data-comment-target-type="keyframe" data-comment-target-id="page-01.hero" data-critical-frame="hero" data-page-id="page-01"><div class="shot gradient-b">Hero</div><p data-i18n="en">Strongest subject and title relationship.</p><p data-i18n="zh">最强主体与标题关系。</p></section>
-            <section class="frame-card" data-commentable="true" data-comment-target-type="keyframe" data-comment-target-id="page-01.transition" data-critical-frame="transition" data-page-id="page-01"><div class="shot gradient-c">Cut</div><p data-i18n="en">Motion bridge into proof beat.</p><p data-i18n="zh">进入证明段的运动桥。</p></section>
+        <section class="panel" data-stage="motion-timeline" data-commentable="true" data-comment-target-type="motion" data-comment-target-id="overview.motion-timeline">
+          <div class="section-heading"><p class="eyebrow">03</p><h2 data-i18n="en">Motion Timeline</h2><h2 data-i18n="zh">运动时间线</h2></div>
+          <div class="timeline-strip" aria-label="Motion intent timeline">
+            <div data-commentable="true" data-comment-target-type="motion" data-comment-target-id="motion.entry" data-asset-id="asset-01"><span>00:00</span><strong>Entry</strong><p>Copy fades in while source card drifts upward.</p></div>
+            <div data-commentable="true" data-comment-target-type="motion" data-comment-target-id="motion.hero" data-asset-id="asset-01"><span>00:06</span><strong>Hero lock</strong><p>Artboard scale settles; selection outline appears.</p></div>
+            <div data-commentable="true" data-comment-target-type="motion" data-comment-target-id="motion.proof" data-asset-id="asset-02"><span>00:14</span><strong>Proof pan</strong><p>Source asset pans to the readable evidence area.</p></div>
+            <div data-commentable="true" data-comment-target-type="motion" data-comment-target-id="motion.landing"><span>00:26</span><strong>Hold</strong><p>Timeline slows; final claim holds.</p></div>
           </div>
         </section>
 
-        <section class="panel" data-stage="motion-before-after" data-aspect-modes="horizontal,vertical">
-          <p class="eyebrow" data-i18n="en">04 / Motion Before And After</p>
-          <p class="eyebrow" data-i18n="zh">04 / 运动前后状态</p>
-          <h2 data-i18n="en">Asset motion as visible states</h2>
-          <h2 data-i18n="zh">把素材运动变成可见状态</h2>
-          <div class="motion-grid">
-            <article data-commentable="true" data-comment-target-type="motion" data-comment-target-id="asset-01.motion" data-asset-id="asset-01" data-aspect-mode="horizontal">
-              <h3>asset-01</h3><div class="before-after"><div>Before</div><div>After</div></div><p data-i18n="en">Slow push-in from full subject to face detail.</p><p data-i18n="zh">从完整主体慢推到面部细节。</p>
-            </article>
-            <article data-commentable="true" data-comment-target-type="motion" data-comment-target-id="asset-02.motion" data-asset-id="asset-02" data-aspect-mode="vertical">
-              <h3>asset-02</h3><div class="before-after"><div>Before</div><div>After</div></div><p data-i18n="en">Wipe reveal from blurred evidence to readable detail.</p><p data-i18n="zh">从模糊证据擦除到可读细节。</p>
-            </article>
+        <section class="panel review-summary" data-stage="review-gate-summary" data-commentable="true" data-comment-target-type="stage" data-comment-target-id="overview.review-gate-summary">
+          <div class="section-heading"><p class="eyebrow">04</p><h2 data-i18n="en">Review Gate Summary</h2><h2 data-i18n="zh">审查门槛摘要</h2></div>
+          <div class="gate-grid">
+            <span>Rhythm locked</span><span>Visual system locked</span><span>Motion intent visible</span><span>Frames inspectable</span><span>Comments exportable</span>
           </div>
+        </section>
+      </section>
+
+      <section class="workbench-view frames-workbench" data-view="frames" data-stage="frames-workbench">
+        <aside class="frame-list" aria-label="Frame list">
+          <p class="eyebrow">Frames</p>
+          <button type="button" data-frame-select="frame-01" aria-pressed="true"><span>01</span><strong>Hook artboard</strong><small>00:00</small></button>
+          <button type="button" data-frame-select="frame-02" aria-pressed="false"><span>02</span><strong>Hero lock</strong><small>00:06</small></button>
+          <button type="button" data-frame-select="frame-03" aria-pressed="false"><span>03</span><strong>Proof pan</strong><small>00:14</small></button>
+        </aside>
+
+        <section class="artboard-stage">
+          <div class="artboard active-frame" data-frame="frame-01" data-commentable="true" data-comment-target-type="frame" data-comment-target-id="frame-01" data-page-id="page-01" data-aspect-mode="vertical"><div class="safe-area"><p>00:00 / Hook</p><h2>Locked main copy</h2><div class="source-card">source asset scroll intent</div></div></div>
+          <div class="artboard" data-frame="frame-02" data-commentable="true" data-comment-target-type="frame" data-comment-target-id="frame-02" data-page-id="page-01" data-critical-frame="hero" data-aspect-mode="vertical"><div class="safe-area"><p>00:06 / Hero</p><h2>Hero lock</h2><div class="source-card selected">selection outline appears</div></div></div>
+          <div class="artboard" data-frame="frame-03" data-commentable="true" data-comment-target-type="frame" data-comment-target-id="frame-03" data-page-id="page-02" data-aspect-mode="vertical"><div class="safe-area"><p>00:14 / Proof</p><h2>Readable evidence</h2><div class="source-card">pan to detail</div></div></div>
         </section>
 
-        <section class="panel" data-stage="style-critique">
-          <p class="eyebrow" data-i18n="en">05 / Style Critique</p>
-          <p class="eyebrow" data-i18n="zh">05 / 风格检查</p>
-          <h2 data-i18n="en">Director/design critique, not engineering QA</h2>
-          <h2 data-i18n="zh">导演/设计检查，不是工程 QA</h2>
-          <div class="critique-grid">
-            <article data-commentable="true" data-comment-target-type="critique" data-comment-target-id="critique.layout-01"><h3>layout-01</h3><p data-i18n="en">Unity: strong. Rhythm: needs longer title hold. Text density: safe.</p><p data-i18n="zh">统一性：强。节奏：标题停留需更久。文字密度：安全。</p></article>
-            <article data-commentable="true" data-comment-target-type="critique" data-comment-target-id="critique.layout-02"><h3>layout-02</h3><p data-i18n="en">Visual relationship: clear. Motion consistency: align wipe speed with layout-01 push.</p><p data-i18n="zh">画面关系：清楚。动效一致性：擦除速度需匹配 layout-01 推进。</p></article>
-            <article data-commentable="true" data-comment-target-type="critique" data-comment-target-id="critique.layout-03"><h3>layout-03</h3><p data-i18n="en">Landing: calm. Risk: vertical crop may over-center the copy.</p><p data-i18n="zh">落点：平静。风险：竖版裁切可能让文字过于居中。</p></article>
-          </div>
-        </section>
-      </div>
+        <aside class="frame-inspector">
+          <p class="eyebrow">Inspector</p>
+          <dl>
+            <dt>Selected frame</dt><dd id="selected-frame-label">frame-01</dd>
+            <dt>Aspect</dt><dd>9:16 artboard</dd>
+            <dt>Motion</dt><dd id="selected-frame-motion">Source card drifts upward; title fades in.</dd>
+            <dt>Safe area</dt><dd>Title and CTA inside inner frame.</dd>
+          </dl>
+          <details class="director-notes">
+            <summary>Director Notes</summary>
+            <p data-i18n="en">Keep notes lightweight; use comments for target-specific feedback.</p>
+            <p data-i18n="zh">Notes 保持轻量；针对具体目标的反馈使用评论。</p>
+          </details>
+        </aside>
+
+        <footer class="frame-timeline" aria-label="Frame timeline">
+          <button type="button" data-frame-select="frame-01">00:00 Hook</button>
+          <button type="button" data-frame-select="frame-02">00:06 Hero</button>
+          <button type="button" data-frame-select="frame-03">00:14 Proof</button>
+        </footer>
+      </section>
 
       <aside class="annotation-rail" data-stage="annotation-layer" aria-label="Side annotations">
-        <div class="rail-sticky">
-          <p class="eyebrow" data-i18n="en">Side Annotations</p>
-          <p class="eyebrow" data-i18n="zh">侧边批注</p>
-          <p class="rail-note" data-i18n="en">Select any weakly marked visual object, write in any language, then export JSON for the next AI revision.</p>
-          <p class="rail-note" data-i18n="zh">选择任意弱标记视觉对象，用任意语言写批注，然后导出 JSON 供下一个 AI 修改。</p>
+        <details open>
+          <summary>Comments / 批注</summary>
+          <p class="rail-note" data-i18n="en">Select any marked object, write in any language, export JSON for the next AI revision.</p>
+          <p class="rail-note" data-i18n="zh">选择任意标记对象，用任意语言写批注，并导出 JSON 给下一个 AI 修改。</p>
           <form id="comment-form" class="comment-form">
             <label><span data-i18n="en">Selected target</span><span data-i18n="zh">已选目标</span><input id="comment-target" name="target" readonly placeholder="Select target" /></label>
             <label><span data-i18n="en">Scope</span><span data-i18n="zh">范围</span><select id="comment-scope" name="scope"><option value="layout">layout</option><option value="copy">copy</option><option value="motion">motion</option><option value="style">style</option><option value="mainline">mainline</option></select></label>
@@ -161,7 +143,7 @@
           <button type="button" id="load-comments">Load pasted JSON</button>
           <pre id="comment-export" aria-live="polite"></pre>
           <ol id="comment-list" class="comment-list"></ol>
-        </div>
+        </details>
       </aside>
     </main>
     <script src="./comment-layer.js"></script>
