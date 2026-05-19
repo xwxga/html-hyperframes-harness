@@ -4,6 +4,9 @@
 
 | 时间 / Time | 作者 / Author | 变更 / Change |
 |---|---|---|
+| 2026-05-18 16:22 | Sisyphus | Reframed board bias fields for director-first previews, language switch, and side annotations. |
+| 2026-05-17 00:42 | Sisyphus | Clarified that final HTML source-of-truth wording applies only after render handoff, not to the review board. |
+| 2026-05-17 00:18 | Sisyphus | Added aspect-mode and semantic comment-target requirements for public Visual Review boards. |
 | 2026-05-15 11:12 | Sisyphus | Clarified that design direction supports an asset-first visual board rather than a production/compliance board. |
 | 2026-05-14 22:37 | Sisyphus | Added concrete route gate, non-generic visual rules, and design readiness checks. |
 | 2026-05-14 17:58 | Sisyphus | Added the Design Router direction template for HyperFrames Direction Harness runs. |
@@ -97,7 +100,7 @@ Write motion direction, not GSAP code.
 
 ## HyperFrames Default Visual Principles Applied / 已应用的 HyperFrames 默认视觉原则
 
-- [ ] HTML is the final composition source of truth. / HTML 是最终 composition 的 source of truth。
+- [ ] After `04_render_plan.md` handoff, the generated final HyperFrames HTML is the composition source of truth; before handoff, Markdown remains the harness source of truth. / `04_render_plan.md` 交接后，生成的最终 HyperFrames HTML 是 composition 的 source of truth；交接前，Markdown 仍是 harness 的 source of truth。
 - [ ] Build hero layouts before animation. / 先搭建 hero layout，再做动画。
 - [ ] Real screenshots and source assets stay primary. / 真实截图和源素材优先。
 - [ ] Motion notes are directional, not GSAP code. / 动效说明是导演语言，不是 GSAP 代码。
@@ -110,15 +113,18 @@ Write motion direction, not GSAP code.
 - Blocking issues / 阻塞问题:
 - Pending user decisions / 待用户决定:
 - Notes that must carry into `03_critical_frame_plan.md` / 必须带入 `03_critical_frame_plan.md` 的说明:
-- Notes that must be visible in the asset-first `direction_board.html` / 必须在 asset-first `direction_board.html` 中可见的说明:
+- Notes that must be visible in the director-first `direction_board.html` / 必须在 director-first `direction_board.html` 中可见的说明:
 
 ## Direction Board Bias / Direction Board 倾向
 
-- Board type / Board 类型: asset-first visual direction board only
-- Visual contact sheet priority / 视觉总览优先级:
-- Asset wall priority / 素材墙优先级:
-- Critical-frame mockup priority / 关键帧 mockup 优先级:
-- Compact production handoff notes / 小型生产交接说明:
+- Board type / Board 类型: director-first visual preview board only
+- Rhythm storyboard priority / 节奏分镜优先级:
+- Layout preview priority / 版面预览优先级:
+- Keyframe preview priority / 关键帧预览优先级:
+- Motion before/after priority / 运动前后状态优先级:
+- Style critique priority / 风格检查优先级:
+- Language switch requirement / 语言切换要求: English default, Chinese optional, one visible language at a time
+- Semantic comment target strategy / 语义评论目标策略: page-id + layout-id + frame-id + asset-id
 
 ## Anti-Patterns / 反模式
 
