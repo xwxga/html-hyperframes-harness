@@ -92,6 +92,8 @@ for (const file of [
   if (!html.includes('data-view-switch="overview"') || !html.includes('data-view-switch="frames"')) errors.push(`${file} missing Overview/Frames view switch`);
   if (!html.includes('data-frame-select="frame-01"')) errors.push(`${file} missing frame selector controls`);
   if (!html.includes('data-lang="en"')) errors.push(`${file} must default to English with body data-lang="en"`);
+  validateTopbarIsNotCommentable(file, html);
+  validateFrameMotionSources(file, html);
   for (const selector of [
     'data-comment-target-type="section"',
     'data-comment-target-type="system"',
@@ -159,6 +161,31 @@ function validateCommentJson(file) {
       }
     }
   });
+}
+
+function validateTopbarIsNotCommentable(file, html) {
+  const topbarMatch = html.match(/<header\b[^>]*class="[^"]*workbench-topbar[^"]*"[^>]*>/);
+  if (!topbarMatch) {
+    errors.push(`${file} missing workbench topbar`);
+    return;
+  }
+  if (/data-commentable="true"|data-comment-target-(type|id)=/.test(topbarMatch[0])) {
+    errors.push(`${file} topbar must not be commentable; view/language controls should not become annotation targets`);
+  }
+}
+
+function validateFrameMotionSources(file, html) {
+  const frameMatches = html.matchAll(/<div\b[^>]*\bdata-frame="([^"]+)"[^>]*>/g);
+  let count = 0;
+  for (const match of frameMatches) {
+    count += 1;
+    const tag = match[0];
+    const frameId = match[1];
+    if (!/\bdata-(motion|frame-motion|motion-intent)="[^"]+"/.test(tag)) {
+      errors.push(`${file} ${frameId} missing frame motion source for inspector`);
+    }
+  }
+  if (count === 0) errors.push(`${file} missing inspectable data-frame artboards`);
 }
 
 function validateGitignore() {
