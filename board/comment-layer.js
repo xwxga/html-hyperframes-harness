@@ -18,11 +18,6 @@
   const allowedScopes = ["layout", "copy", "motion", "style", "mainline"];
   const allowedPriorities = ["low", "medium", "high"];
   const allowedStatuses = ["open", "resolved", "rejected", "pending", "pending-target"];
-  const frameMotion = {
-    "frame-01": "Source card drifts upward; title fades in.",
-    "frame-02": "Artboard scale settles; selection outline appears.",
-    "frame-03": "Source asset pans to readable evidence area."
-  };
   const maxComments = 500;
   const maxTextLength = 2000;
   let selectedTarget = null;
@@ -114,7 +109,25 @@
     const label = document.getElementById("selected-frame-label");
     const motion = document.getElementById("selected-frame-motion");
     if (label) label.textContent = next;
-    if (motion) motion.textContent = frameMotion[next] || "";
+    if (motion) motion.textContent = getFrameMotion(next);
+  }
+
+  function getFrameMotion(frameId) {
+    const frame = Array.from(document.querySelectorAll("[data-frame]")).find((item) => item.dataset.frame === frameId);
+    if (!frame) return "Motion intent not specified for this frame.";
+    const explicitMotion = cleanText(frame.dataset.motion || frame.dataset.frameMotion || frame.dataset.motionIntent || "", maxTextLength);
+    if (explicitMotion) return explicitMotion;
+    const inlineMotion = frame.querySelector("[data-motion-intent], [data-frame-motion]");
+    if (inlineMotion) {
+      const text = cleanText(inlineMotion.textContent, maxTextLength);
+      if (text) return text;
+    }
+    const sourceCard = frame.querySelector(".source-card");
+    if (sourceCard) {
+      const text = cleanText(sourceCard.textContent, maxTextLength);
+      if (text) return `Source asset motion: ${text}`;
+    }
+    return "Motion intent not specified for this frame.";
   }
 
   function selectTarget(target) {
