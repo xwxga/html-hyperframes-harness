@@ -4,6 +4,8 @@
 
 | 时间 / Time | 作者 / Author | 变更 / Change |
 |---|---|---|
+| 2026-05-24 00:14 | Codex | Replaced target planning with stable frame metadata and frame-style lock fields. / 将目标规划替换为稳定帧 metadata 和关键帧风格锁定字段。 |
+| 2026-05-17 00:18 | Sisyphus | Added semantic target IDs and aspect-mode review requirements for Direction Boards. |
 | 2026-05-15 16:36 | Sisyphus | Added narrative lock, scope classification, and drift-stop fields for post-review edits. |
 | 2026-05-15 11:12 | Sisyphus | Added mandatory pre-board convergence fields for sections, assets, and mainline choices. |
 | 2026-05-14 22:37 | Sisyphus | Added page readiness fields and stricter continuity/waiver handling. |
@@ -42,6 +44,9 @@
 - Design constraints inherited from `02_design_direction.md` / 继承自 `02_design_direction.md` 的设计约束:
 - Ready gate status / 准备状态: ready / blocked
 - Blocking issues / 阻塞问题:
+- Aspect modes for visual review / 视觉审查画幅: horizontal / vertical / both
+- Stable metadata prefix / 稳定 metadata 前缀: page-XX / section-XX / asset-XX / motion-XX
+- Critical-frame style route / 关键帧风格路线: HyperFrames default / user-selected route
 
 ## Pre-Board Convergence / Board 前收敛
 
@@ -81,6 +86,18 @@ This section must be filled from user answers before creating `direction_board.h
 - User confirmed sections/assets/mainline / 用户已确认章节、素材、主线: yes / no / waived
 - Waiver reason if any / 如有豁免，原因:
 - Allowed to generate `direction_board.html` / 是否允许生成 `direction_board.html`: yes / no
+
+### Stable Frame Metadata Plan / 稳定帧 Metadata 计划
+
+Every visible frame and asset in `direction_board.html` needs stable metadata so review decisions can map to final HTML.
+
+`direction_board.html` 中每个可见 frame 和 asset 都需要稳定 metadata，方便审查决策映射到最终 HTML。
+
+| Target ID / 目标 ID | Type / 类型 | Source / 来源 | Aspect modes / 画幅模式 | Notes / 备注 |
+|---|---|---|---|---|
+| page-01.entry | critical-frame | Page 01 Entry | horizontal, vertical |  |
+| page-01.hero | critical-frame | Page 01 Hero | horizontal, vertical |  |
+| page-01.transition | critical-frame | Page 01 Transition | horizontal, vertical |  |
 
 ## Narrative Lock / 主线锁定
 
@@ -177,6 +194,7 @@ Use this section for every change after board review or mainline lock.
 - Page ready for direction board / 本页是否可进入 direction board: yes / no
 - Waiver if any / 如有豁免:
 - Hero-frame mockup required in board / Board 中是否必须有 hero-frame mockup: yes / no
+- Stable frame IDs / 稳定帧 ID: page-01.entry / page-01.hero / page-01.transition
 
 ---
 

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HTML HyperFrames Harness Demo / 演示</title>
+    <style>
+      :root { color-scheme: light; --bg: #eef3f7; --ink: #111821; --muted: #66727e; --paper: #fff; --line: #d6dde5; --accent: #1f6feb; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--bg); color: var(--ink); font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.5; }
+      main { width: min(1060px, calc(100vw - 32px)); margin: 0 auto; padding: 72px 0; }
+      h1 { margin: 0; font-size: 6rem; line-height: .92; letter-spacing: 0; }
+      h2 { margin-top: 42px; font-size: 2.3rem; letter-spacing: 0; }
+      p { color: var(--muted); max-width: 760px; }
+      .eyebrow { color: var(--accent); font-size: .78rem; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
+      .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+      .card { min-height: 230px; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.9); box-shadow: 0 20px 50px rgba(15,23,42,.1); }
+      .card strong { display: block; font-size: 1.35rem; line-height: 1.1; color: var(--ink); }
+      a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+      code { background: rgba(17,24,33,.08); padding: 2px 6px; border-radius: 6px; }
+      @media (max-width: 760px) {
+        main { padding: 40px 0; }
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 1.7rem; }
+        .grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">Public V1 Demo / 公开 V1 演示</p>
+      <h1>HTML HyperFrames Harness</h1>
+      <p>Review the real 6-frame Director Workbench, a lightweight render preview, and the final HyperFrames source from one public demo.</p>
+      <p>在一个公开 demo 中查看真实 6 帧 Director Workbench、轻量渲染预览和最终 HyperFrames source。</p>
+
+      <section class="grid" aria-label="Demo links">
+        <article class="card"><strong>Director Workbench / 导演工作台</strong><p>Open the asset-first 6-frame review layer for the real generated HyperFrames video project.</p><a href="../examples/html-hyperframes-video-project/harness/direction_board.html">Open workbench</a></article>
+        <article class="card"><strong>Render Preview / 渲染预览</strong><p>Open a small preview MP4 derived from the final render without committing the 143 MB output.</p><a href="../examples/html-hyperframes-video-project/renders/html_hyperframes_5frame_preview.mp4">Open preview</a></article>
+        <article class="card"><strong>Final HyperFrames Source / 最终 Composition 源码</strong><p>Open the renderable <code>index.html</code>. HyperFrames scrubs its timeline during capture.</p><a href="../examples/html-hyperframes-video-project/index.html">Open final index</a></article>
+      </section>
+
+      <h2>Validation / 验证</h2>
+      <p>Run <code>node scripts/validate-static.js</code> before publishing. It checks required files, director board stages, language switch, golden-example frames, locked copy, assets, retired references, large files, and suspicious secrets.</p>
+      <p>发布前运行 <code>node scripts/validate-static.js</code>。它会检查必需文件、导演版 board stage、语言切换、golden example 帧数、锁定文案、素材、退役引用、大文件和可疑密钥。</p>
+    </main>
+  </body>
+</html>

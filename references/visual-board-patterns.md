@@ -4,158 +4,101 @@
 
 | 时间 / Time | 作者 / Author | 变更 / Change |
 |---|---|---|
-| 2026-05-16 21:24 | Codex | Updated canonical and example paths for the standalone GitHub package. |
-| 2026-05-15 16:36 | Sisyphus | Added layout-only boundary and mainline-lock preservation rules for Pattern A revisions. |
-| 2026-05-15 13:00 | Sisyphus | Added self-path and verification wording for board-pattern routing. |
-| 2026-05-15 13:00 | Sisyphus | Added the mandatory asset-first visual board pattern library for HyperFrames Direction Harness. |
+| 2026-05-24 00:14 | Codex | Removed the side review rail and defined HyperFrames default as the critical-frame style route. / 移除侧边审查栏，并将 HyperFrames 默认定义为关键帧风格路线。 |
+| 2026-05-23 23:31 | Codex | Defined Pattern W as the shell and Pattern A as the required asset-first substance. / 将 Pattern W 定义为外壳，并将 Pattern A 定义为必需的素材优先内容。 |
+| 2026-05-19 22:31 | Sisyphus | Promoted Pattern W as the Figma-like Director Workbench pattern. / 将 Pattern W 升级为 Figma-like Director Workbench 模式。 |
+| 2026-05-18 16:22 | Sisyphus | Replaced engineering-gate Pattern A with director-first preview board pattern, language switch, and per-layout critique. |
 
 ## Purpose / 目的
 
-This file binds visual board structure to the HyperFrames Direction Harness. `DESIGN.md` files decide aesthetic language; this pattern library decides how the Direction Board is composed.
+This file defines the canonical visual pattern for `direction_board.html`. The current pattern is **Pattern W shell + Pattern A substance**.
 
-本文把视觉 board 的结构绑定到 HyperFrames Direction Harness。`DESIGN.md` 决定审美语言；本模式库决定 Direction Board 怎么组织。
+本文定义 `direction_board.html` 的规范视觉模式。当前模式是 **Pattern W 外壳 + Pattern A 内容**。
 
-Canonical path: `references/visual-board-patterns.md`.
+## Pattern W — Director Workbench / Director Workbench 模式
 
-规范路径：`references/visual-board-patterns.md`。
+### Goal / 目标
 
-## Mandatory Pattern / 强制模式
+Give the director one Figma-like workbench where overall direction and every frame can be reviewed before final HyperFrames generation. Pattern W defines the workbench UI shell; Pattern A defines the asset-first evidence that must fill that shell.
 
-### Pattern A — Asset-first Visual Direction Board / 素材优先视觉方向板
+给导演一个 Figma-like workbench，在最终 HyperFrames 生成前同时审查整体方向和每一帧。Pattern W 定义 workbench UI 外壳；Pattern A 定义必须填入这个外壳的素材优先证据。
 
-Use this pattern for every `direction_board.html` unless the user explicitly asks for a different review artifact.
+### Visual Language / 视觉语言
 
-除非用户明确要求其他审查 artifact，否则每个 `direction_board.html` 都使用本模式。
+- white canvas / 白色画布
+- soft grid / 柔和网格
+- selection outlines / 选择描边
+- small pills / 小 pills
+- side panels / 侧栏
+- 9:16 artboards / 9:16 artboards
+- bottom timeline / 底部 timeline
+- Figma-like controls, not Apple/macOS chrome / Figma-like 控件，不用 Apple/macOS chrome
 
-#### Goal / 目标
+### Required Information Architecture / 必需信息架构
 
-Let the user decide whether the video direction works by looking at visual evidence first.
+1. **Top Bar / 顶栏** — project name, status, Overview/Frames switch, language switch.
+2. **Overview View / Overview 视图** — Director Cover, Visual Contact Sheet, Asset Wall, Section Storyboard, Critical Frame Mockups, Visual System Lock, Motion Timeline, Review Gate Summary.
+3. **Frames View / Frames 视图** — left frame list, center 9:16 artboard, right inspector, bottom timeline.
+4. **Frame Style Lock / 关键帧风格锁定** — Inspector declares the active critical-frame visual route.
 
-让用户先通过视觉证据判断视频方向是否成立。
-
-#### Required Order / 必须顺序
-
-1. **Visual Contact Sheet / 视觉总览** — first viewport, visual-dominant.
-2. **Asset Wall / 素材墙** — all must-use assets visible with role/crop/risk.
-3. **Section Storyboard / 章节分镜** — user-confirmed sections as visual sequence.
-4. **Critical Frame Mockups / 关键帧 Mockup** — hero frames first; Entry/Transition optional where useful.
-5. **Visual Route / 视觉路线** — compact design-router source and concrete rules.
-6. **Motion & Continuity Strip / 动效与连续性条** — compact anchors and transition language.
-7. **Compact Production Handoff / 小型生产交接** — mandatory but small.
-8. **Review & Sync / 审查与同步** — pending changes and Markdown sync status.
-
-#### Required Visual Ratio / 必须视觉比例
-
-- First viewport: at least 60% visual material.
-- Whole board before the production section: visual objects must dominate prose.
-- Every major section needs at least one thumbnail, crop, storyboard card, frame mockup, or motion strip.
-
-- 首屏至少 60% 是视觉材料。
-- Production section 之前，视觉对象必须压过 prose。
-- 每个主要章节至少有一个 thumbnail、crop、storyboard card、frame mockup 或 motion strip。
-
-#### Required DOM / 必须 DOM
+### Required DOM / 必需 DOM
 
 ```html
-<section data-stage="pre-board-convergence" data-confirmed="true"></section>
-<section data-stage="visual-contact-sheet" data-ready-state="ready|blocked|pending-sync"></section>
-<article data-asset-id="..." data-asset-role="..." data-asset-status="must-use|optional|reference-only|banned"></article>
-<article data-section-id="section-01" data-page-id="page-01" data-page-state="ready|blocked"></article>
-<section data-critical-frame="entry|hero|transition" data-page-id="page-01"></section>
-<section data-stage="visual-route" data-primary-design="..."></section>
-<section data-stage="compact-production-handoff" data-ready-state="ready|blocked|pending-sync"></section>
-<section data-stage="review-sync" data-sync-state="synced|pending|waived"></section>
+<body data-lang="en" data-active-view="overview" data-active-frame="frame-01">
+<header data-stage="director-workbench"></header>
+<button data-view-switch="overview"></button>
+<button data-view-switch="frames"></button>
+<section data-stage="overview-view"></section>
+<section data-stage="visual-contact-sheet"></section>
+<section data-stage="asset-wall"></section>
+<section data-stage="section-storyboard"></section>
+<section data-stage="critical-frame-mockups"></section>
+<section data-stage="visual-system-lock"></section>
+<section data-stage="motion-timeline"></section>
+<section data-stage="frames-workbench"></section>
 ```
 
-For long screenshots:
+## Pattern A Substance / Pattern A 内容
 
-```html
-<div data-long-screenshot="true" style="max-height: ...; overflow: auto;"></div>
-```
+Pattern A is mandatory for real video examples. It prevents a board from becoming a pretty but empty UI contract.
 
-#### Forbidden / 禁止
+真实视频示例必须使用 Pattern A 内容。它防止 board 变成漂亮但空洞的 UI contract。
 
-- Long planning document as the main board.
-- Production/compliance checklist before visual evidence.
-- Text-only critical frame descriptions.
-- Generic mood adjectives without concrete visual values.
-- Assets hidden after the timeline.
-- Auto-scrolling long screenshots.
-- A separate Production Board.
-- Changing the narrative mainline during a layout-only board revision.
-- Reordering sections or rewriting page meanings because the user asked for visual polish.
+### Required Order Inside Overview / Overview 内必需顺序
 
-- 不要把 board 做成长篇计划文档。
-- 不要把 production/compliance checklist 放在视觉证据前面。
-- 不要只用文字描述关键帧。
-- 不要只写泛泛 mood 形容词而没有具体视觉值。
-- 不要把素材藏在 timeline 后面。
-- 不要让长截图自动滚动。
-- 不要做独立 Production Board。
-- 不要在仅版式 board 修改中改变叙事主线。
-- 不要因为用户要求视觉润色就重排章节或改写页面含义。
+1. **Visual Contact Sheet / 视觉总览** — first viewport, visual-dominant, every planned final frame visible.
+2. **Asset Wall / 素材墙** — all must-use assets visible with role, page assignment, crop, and risk.
+3. **Section Storyboard / 章节分镜** — user-confirmed sections as a visual sequence.
+4. **Critical Frame Mockups / 关键帧 Mockup** — one 9:16 mockup per final frame, using locked final-video copy.
+5. **Visual System Lock / 视觉系统锁定** — artboard, typography, components, asset treatment.
+6. **Motion Timeline / 运动时间线** — source-card motion, transition anchor, and hold intent.
+7. **Review Gate Summary / 审查门槛摘要** — compact status only.
 
-#### Layout-only Revision Boundary / 仅版式修改边界
+### Required Visual Ratio / 必须视觉比例
 
-When revising an already-reviewed Pattern A board, separate visual changes from narrative changes.
+- The first viewport must be at least 60% visual material.
+- Before the review summary, visual objects must dominate prose.
+- Every planned final frame needs a visible mock, not only inspector text.
+- Locked final-video copy must remain source content; translate UI labels only.
+- The Frames Inspector must declare the critical-frame style route. Default route: HyperFrames default, meaning white grid canvas, black linework, green status dot, sparse title-card copy, and source-card evidence.
 
-修改已审查的 Pattern A board 时，必须区分视觉修改和叙事修改。
+### Forbidden Empty-Board Patterns / 禁止的空泛 Board
 
-Allowed without unlocking mainline:
+- Replacing source titles with generic English positioning copy.
+- Compressing a detailed critical-frame plan into a short summary table.
+- Showing fewer frame previews than the final HyperFrames composition.
+- Hiding must-use assets behind a final summary or inspector-only view.
+- Treating validator stage presence as proof of visual direction quality.
 
-- larger assets, different crops, clearer hierarchy
-- reduced text density, subtitle removal, visual spacing changes
-- 9:16 framing, manual scroll containers, slider comparisons
-- component polish within the selected Design Router style
+### Legacy Replacements / 旧结构替换
 
-不解锁主线时允许：素材放大、裁切变化、更清晰层级、降低文字密度、取消字幕、版式间距调整、9:16 构图、手动 scroll 容器、slider 对比、既定 Design Router 风格内的组件润色。
+- `Layout Previews` -> `Visual System Lock`
+- `Motion Before/After` -> `Motion Timeline` or `Motion Strip`
+- `Visual Contact Sheet`, `Asset Wall`, and `Critical Frame Mockups` remain required substance, not legacy content.
+- side review rails -> removed from the public workbench
 
-Requires explicit mainline unlock:
+### Boundary / 边界
 
-- changing section order
-- changing narrative spine, hook, or ending
-- adding/removing claims
-- changing what a page means
+`direction_board.html` remains a pre-generation review artifact. It must not become the final HyperFrames `index.html`.
 
-需要明确解锁主线：改变章节顺序、改变叙事主轴/hook/结尾、增删论点、改变页面含义。
-
-## Pattern Source Example / 模式来源示例
-
-Use the rough HTML artifact board as a structure reference, not as content to copy:
-
-- `examples/asset-first-board/direction_board.skeleton.html`
-- `examples/luqee-workflow-film-v2-harness/direction_board.html`
-
-使用 rough HTML artifact board 作为结构参考，不复制其具体内容。
-
-What to borrow:
-
-- hero contact sheet
-- asset wall before text-heavy planning
-- visible crop/use/risk notes
-- page storyboard with visual assets beside copy
-- Entry / Hero / Transition frame cards
-- constrained manual scroll for long webpage screenshots
-
-What not to borrow:
-
-- project-specific screenshots
-- exact colors if a different Design Router route was selected
-- exact copy or page count
-- rough-project-specific timing
-
-## Relationship To Design Router / 与 Design Router 的关系
-
-Design Router chooses the aesthetic system. Pattern A chooses the board structure.
-
-Design Router 选择审美系统。Pattern A 选择 board 结构。
-
-Examples:
-
-- `claude` + Pattern A = parchment/serif asset-first board.
-- `theverge` + Pattern A = dark/mint editorial asset-first board.
-- `figma` + Pattern A = canvas/component-review asset-first board.
-
-The selected design system may change colors/type/components, but it must not change Pattern A's visual-first order.
-
-选中的设计系统可以改变颜色、字体、组件，但不能改变 Pattern A 的视觉优先顺序。
+`direction_board.html` 仍然是生成前审查 artifact，不能变成最终 HyperFrames `index.html`。

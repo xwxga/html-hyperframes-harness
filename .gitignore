@@ -3,6 +3,7 @@
 .env.local
 .env.*.local
 .worktree-id
+.sisyphus/
 node_modules/
 dist/
 build/

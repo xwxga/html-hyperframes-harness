@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <link rel="icon" href="data:," />
+    <title>HTML + HyperFrames 6-Frame Preview</title>
+    <style>
+      :root {
+        --black: #050505;
+        --white: #ffffff;
+        --soft: #f7f7f7;
+        --line: rgba(5, 5, 5, 0.16);
+        --grid: rgba(5, 5, 5, 0.045);
+        --blue: #0d99ff;
+        --purple: #a259ff;
+        --green: #1abc54;
+        --orange: #ff7262;
+        --shadow: 0 42px 100px rgba(0, 0, 0, 0.18);
+        --sans: Inter, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+        --mono: "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--white);
+        color: var(--black);
+        font-family: var(--sans);
+      }
+
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--white);
+      }
+
+      .canvas-grid {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background-image:
+          linear-gradient(var(--grid) 1px, transparent 1px),
+          linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+        background-size: 48px 48px;
+      }
+
+      .brandbar {
+        position: absolute;
+        left: 54px;
+        right: 54px;
+        top: 46px;
+        z-index: 40;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        pointer-events: none;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        height: 42px;
+        border: 2px solid var(--black);
+        border-radius: 999px;
+        background: var(--white);
+        padding: 0 16px;
+        font-family: var(--mono);
+        font-size: 17px;
+        font-weight: 760;
+        letter-spacing: 0;
+      }
+
+      .dot {
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: var(--blue);
+      }
+
+      .dot.purple { background: var(--purple); }
+      .dot.green { background: var(--green); }
+      .dot.orange { background: var(--orange); }
+
+      .progress {
+        width: 250px;
+        height: 12px;
+        border: 2px solid var(--black);
+        border-radius: 999px;
+        background: var(--white);
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        width: 0%;
+        height: 100%;
+        background: var(--black);
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        will-change: opacity, transform;
+      }
+
+      .scene-shell {
+        position: absolute;
+        left: 54px;
+        right: 54px;
+        top: 120px;
+        bottom: 64px;
+        border: 2px solid var(--black);
+        border-radius: 28px;
+        background: rgba(255, 255, 255, 0.94);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+
+      .scene-shell::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background-image:
+          linear-gradient(var(--grid) 1px, transparent 1px),
+          linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+        background-size: 40px 40px;
+      }
+
+      .scene-shell > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .scene-label {
+        position: absolute;
+        left: 28px;
+        top: 28px;
+        z-index: 5;
+      }
+
+      .title {
+        position: absolute;
+        left: 46px;
+        right: 46px;
+        z-index: 6;
+        font-size: 88px;
+        line-height: 1.06;
+        letter-spacing: 0;
+        font-weight: 820;
+        word-break: keep-all;
+      }
+
+      .title.top {
+        top: 112px;
+      }
+
+      .title.bottom {
+        bottom: 76px;
+      }
+
+      .title.small {
+        font-size: 74px;
+      }
+
+      .meta-note {
+        position: absolute;
+        left: 46px;
+        bottom: 46px;
+        max-width: 760px;
+        color: #747474;
+        font-size: 29px;
+        line-height: 1.3;
+        font-weight: 680;
+      }
+
+      .slot {
+        position: absolute;
+        left: 52px;
+        right: 52px;
+        top: 288px;
+        height: 1040px;
+        display: grid;
+        place-items: center;
+        border: 3px dashed rgba(5, 5, 5, 0.26);
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.62);
+        color: #6a6a6a;
+        font-size: 38px;
+        font-weight: 740;
+      }
+
+      .asset-card {
+        position: absolute;
+        border: 2px solid var(--black);
+        border-radius: 22px;
+        background: var(--white);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        will-change: transform, opacity;
+      }
+
+      .asset-card video,
+      .asset-card img {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .asset-card video {
+        object-fit: cover;
+      }
+
+      .asset-card img {
+        object-fit: cover;
+      }
+
+      .asset-card.contain img,
+      .asset-card.contain video {
+        object-fit: contain;
+        background: var(--white);
+      }
+
+      .media-viewport {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 64px;
+        bottom: 0;
+        overflow: hidden;
+        background: var(--white);
+      }
+
+      .media-viewport.full {
+        top: 0;
+      }
+
+      .media-viewport video,
+      .media-viewport img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: auto;
+        min-height: 100%;
+        object-fit: cover;
+        transform-origin: top left;
+        will-change: transform;
+      }
+
+      .media-viewport img {
+        z-index: 1;
+      }
+
+      .media-viewport video {
+        z-index: 2;
+        background: var(--white);
+        mix-blend-mode: normal;
+      }
+
+      .media-viewport.twitter-main video,
+      .media-viewport.twitter-main img,
+      .media-viewport.tom-main video,
+      .media-viewport.tom-main img {
+        width: 116.2%;
+        min-height: 0;
+      }
+
+      .tom-main {
+        top: 0;
+      }
+
+      .tom-main video {
+        width: 128%;
+      }
+
+      .source-card {
+        left: 86px;
+        right: 86px;
+        top: 300px;
+        height: 1040px;
+      }
+
+      .karpathy-card {
+        left: 102px;
+        right: 102px;
+        top: 236px;
+        height: 1220px;
+      }
+
+      .karpathy-card img {
+        object-position: top center;
+      }
+
+      .examples-card {
+        left: 70px;
+        right: 70px;
+        top: 420px;
+        height: 1120px;
+      }
+
+      .tom-card {
+        left: 92px;
+        right: 92px;
+        top: 650px;
+        height: 420px;
+        border: 0;
+        border-radius: 18px;
+        background: transparent;
+        box-shadow: none;
+        z-index: 4;
+      }
+
+      .workflow-card {
+        left: 70px;
+        right: 70px;
+        top: 430px;
+        height: 1060px;
+        z-index: 4;
+      }
+
+      .canvasbar {
+        position: absolute;
+        left: 18px;
+        right: 18px;
+        top: 18px;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 46px;
+        border-bottom: 2px solid rgba(5, 5, 5, 0.12);
+        color: #444;
+        font-family: var(--mono);
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      .selection {
+        position: absolute;
+        inset: 22px;
+        z-index: 6;
+        border: 2px dashed rgba(13, 153, 255, 0.72);
+        border-radius: 20px;
+        pointer-events: none;
+      }
+
+      .selection::before,
+      .selection::after {
+        content: "";
+        position: absolute;
+        top: -9px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--blue);
+      }
+
+      .selection::before {
+        left: -9px;
+      }
+
+      .selection::after {
+        right: -9px;
+      }
+
+      .component-chip {
+        position: absolute;
+        right: 44px;
+        bottom: 38px;
+        z-index: 8;
+        border: 2px solid var(--black);
+        border-radius: 999px;
+        background: var(--white);
+        padding: 10px 16px;
+        font-family: var(--mono);
+        font-size: 18px;
+        font-weight: 760;
+      }
+
+      .wipe {
+        position: absolute;
+        inset: 0;
+        z-index: 80;
+        background: var(--white);
+        transform: translateY(100%);
+      }
+    </style>
+  </head>
+  <body>
+    <main
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="180"
+      data-width="1080"
+      data-height="1920"
+    >
+      <div class="canvas-grid" data-layout-ignore></div>
+      <header class="brandbar" data-layout-ignore>
+        <span class="pill"><i class="dot green"></i> HTML + HyperFrames</span>
+        <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+      </header>
+
+      <section
+        id="frame-01"
+        class="scene clip"
+        data-scene-start="0"
+        data-scene-duration="15"
+        data-page-id="page-01"
+        data-critical-frame="hero"
+        data-director-intent="placeholder for human opening, true 9:16"
+        data-continuity-anchor="figma-artboard"
+      >
+        <div class="scene-shell">
+          <span class="scene-label pill">01 / SLOT</span>
+          <div class="slot motion" data-delay="1.0">human insert later</div>
+          <h1 class="title bottom motion" data-delay="1.6">OPENING SLOT</h1>
+          <p class="meta-note motion" data-delay="2.1">6 个 1080×1920 竖屏大字卡</p>
+        </div>
+      </section>
+
+      <section
+        id="frame-02"
+        class="scene clip"
+        data-scene-start="15"
+        data-scene-duration="30"
+        data-page-id="page-02"
+        data-critical-frame="hero"
+        data-director-intent="Thariq article hook, sparse title only"
+        data-continuity-anchor="source-card"
+      >
+        <div class="scene-shell">
+          <span class="scene-label pill"><i class="dot"></i> 02 / HOOK</span>
+          <article class="asset-card source-card motion" data-delay="0.8" data-asset-id="thariq_x_first_panel" data-asset-role="hook-source">
+            <div class="canvasbar"><span>THARIQ ARTICLE</span><span>source selected</span></div>
+            <div class="media-viewport twitter-main source-media">
+              <video
+                id="video-thariq-hook"
+                src="assets/thariq_x_first_panel_render.mp4"
+                poster="assets/thariq_x_first_panel_first_frame.png"
+                muted
+                autoplay
+                loop
+                playsinline
+                preload="auto"
+                data-start="0"
+                data-duration="180"
+                data-video-rate="0.45"
+                data-layout-allow-overflow="true"
+              ></video>
+            </div>
+            <i class="selection"></i>
+          </article>
+          <h1 class="title bottom motion" data-delay="1.5">网页，正在变成新的编导台</h1>
+        </div>
+      </section>
+
+      <section
+        id="frame-03"
+        class="scene clip"
+        data-scene-start="45"
+        data-scene-duration="30"
+        data-page-id="page-03"
+        data-critical-frame="hero"
+        data-director-intent="Karpathy authority crop, no text wall reading"
+        data-continuity-anchor="authority-card"
+      >
+        <div class="scene-shell">
+          <span class="scene-label pill"><i class="dot purple"></i> 03 / AUTHORITY</span>
+          <article class="asset-card karpathy-card motion" data-delay="0.7" data-layout-allow-overflow="true" data-asset-id="karpathy_html_quote" data-asset-role="authority-quote">
+            <img id="karpathyImage" src="assets/karpathy_html_quote.png" alt="Karpathy HTML quote screenshot" />
+            <i class="selection"></i>
+          </article>
+          <h1 class="title bottom small motion" data-delay="1.45">人类吃信息，靠视觉和声音</h1>
+        </div>
+      </section>
+
+      <section
+        id="frame-04"
+        class="scene clip"
+        data-scene-start="75"
+        data-scene-duration="35"
+        data-page-id="page-04"
+        data-critical-frame="hero"
+        data-director-intent="Thariq examples as visual proof"
+        data-continuity-anchor="example-card"
+      >
+        <div class="scene-shell">
+          <span class="scene-label pill"><i class="dot green"></i> 04 / EXAMPLES</span>
+          <h1 class="title top motion" data-delay="0.8">不是文档，是可看的例子</h1>
+          <article class="asset-card examples-card motion" data-delay="1.2" data-asset-id="html_effectiveness_site" data-asset-role="example-proof">
+            <div class="canvasbar"><span>HTML EFFECTIVENESS</span><span>examples grid</span></div>
+            <div class="media-viewport examples-media">
+              <video
+                id="video-html-examples"
+                src="assets/html_effectiveness_site_scroll_render.mp4"
+                poster="assets/html_effectiveness_site_scroll_first_frame.png"
+                muted
+                autoplay
+                loop
+                playsinline
+                preload="auto"
+                data-start="0"
+                data-duration="180"
+                data-video-rate="0.65"
+                data-layout-allow-overflow="true"
+              ></video>
+            </div>
+            <i class="selection"></i>
+          </article>
+        </div>
+      </section>
+
+      <section
+        id="frame-05"
+        class="scene clip"
+        data-scene-start="110"
+        data-scene-duration="30"
+        data-page-id="page-05"
+        data-critical-frame="hero"
+        data-director-intent="Tom html-anything as a full-size market signal card"
+        data-continuity-anchor="tom-card"
+      >
+        <div class="scene-shell">
+          <span class="scene-label pill"><i class="dot orange"></i> 05 / HTML-ANYTHING</span>
+          <article class="asset-card tom-card motion" data-delay="0.9" data-asset-id="tuturetom_main_video" data-asset-role="market-signal">
+            <div class="media-viewport tom-main tom-media">
+              <video
+                id="video-tom-html-anything"
+                src="assets/tuturetom_main_video_10s_render.mp4"
+                poster="assets/tuturetom_main_video_10s_first_frame.png"
+                muted
+                autoplay
+                loop
+                playsinline
+                preload="auto"
+                data-start="0"
+                data-duration="180"
+                data-video-rate="1"
+                data-layout-allow-overflow="true"
+              ></video>
+            </div>
+          </article>
+          <h1 class="title bottom small motion" data-delay="1.5">网页输出，已经有人在做</h1>
+        </div>
+      </section>
+
+      <section
+        id="frame-06"
+        class="scene clip"
+        data-scene-start="140"
+        data-scene-duration="40"
+        data-page-id="page-06"
+        data-critical-frame="hero"
+        data-director-intent="User workflow HTML direction board as the final proof"
+        data-continuity-anchor="workflow-card"
+      >
+        <div class="scene-shell">
+          <span class="scene-label pill"><i class="dot green"></i> 06 / WORKFLOW</span>
+          <h1 class="title top motion" data-delay="0.7">先生成编导台，再生成视频</h1>
+          <article class="asset-card workflow-card motion" data-delay="1.1" data-asset-id="figma_direction_board" data-asset-role="workflow-proof">
+            <div class="canvasbar"><span>MY WORKFLOW HTML</span><span>final proof</span></div>
+            <div class="media-viewport workflow-media">
+              <video
+                id="video-workflow-board"
+                src="assets/figma_direction_board_scroll_render.mp4"
+                poster="assets/figma_direction_board_scroll_first_frame.png"
+                muted
+                autoplay
+                loop
+                playsinline
+                preload="auto"
+                data-start="0"
+                data-duration="180"
+                data-video-rate="0.55"
+                data-layout-allow-overflow="true"
+              ></video>
+            </div>
+            <i class="selection"></i>
+          </article>
+          <span class="component-chip motion" data-delay="2.2">网页式编导台</span>
+        </div>
+      </section>
+
+      <div id="wipe" class="wipe" data-layout-ignore></div>
+    </main>
+
+    <script>
+      const durationSeconds = 180;
+      const scenes = Array.from(document.querySelectorAll(".scene"));
+      const progressFill = document.getElementById("progressFill");
+      const wipe = document.getElementById("wipe");
+      function clamp(value, min, max) {
+        return Math.max(min, Math.min(max, value));
+      }
+
+      function smooth(edge0, edge1, value) {
+        const x = clamp((value - edge0) / (edge1 - edge0), 0, 1);
+        return x * x * (3 - 2 * x);
+      }
+
+      function setElement(el, props) {
+        if (!el) return;
+        Object.entries(props).forEach(([key, value]) => {
+          el.style[key] = value;
+        });
+      }
+
+      function setMediaPan(target, x, y, scale = 1) {
+        const elements = target instanceof Element ? [target] : Array.from(target || []);
+        elements.forEach((el) => {
+          setElement(el, { transform: `translate(${x}, ${y}px) scale(${scale})` });
+        });
+      }
+
+      function syncSceneVideos(scene, local) {
+        scene.querySelectorAll("video").forEach((video) => {
+          if (video.paused) {
+            video.play().catch(() => {});
+          }
+
+          if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+          const rate = Number(video.dataset.videoRate || 1);
+          const target = (local * rate) % video.duration;
+          if (Math.abs(video.currentTime - target) > 0.35) {
+            video.currentTime = target;
+          }
+        });
+      }
+
+      function updateScene(scene, t) {
+        const start = Number(scene.dataset.sceneStart);
+        const duration = Number(scene.dataset.sceneDuration);
+        const end = start + duration;
+        const isLastScene = end >= durationSeconds;
+        const active = t >= start && (isLastScene ? t <= end : t < end);
+        const local = clamp(t - start, 0, duration);
+        const visible = active;
+        const drift = smooth(start, end, t) * -16;
+
+        scene.style.visibility = visible ? "visible" : "hidden";
+        scene.style.opacity = visible ? "1" : "0";
+        scene.style.transform = `translateY(${visible ? drift : 0}px)`;
+
+        if (visible) syncSceneVideos(scene, local);
+
+        scene.querySelectorAll(".motion").forEach((el) => {
+          const delay = Number(el.dataset.delay || 0);
+          const p = smooth(start + delay, start + delay + 1.0, t);
+          const localExit = isLastScene ? 0 : smooth(end - 0.8, end + 0.1, t);
+          const y = 54 * (1 - p) - localExit * 62;
+          el.style.opacity = (p * (1 - localExit)).toFixed(3);
+          el.style.transform = `translateY(${y}px)`;
+        });
+
+        if (scene.id === "frame-02") {
+          const card = scene.querySelector(".source-card");
+          const media = scene.querySelectorAll(".source-media > video");
+          const push = smooth(2, duration - 2, local);
+          setElement(card, { transform: `translateY(${54 * (1 - smooth(0.8, 1.8, local)) - 10 * push}px) scale(${0.97 + push * 0.04})` });
+          setMediaPan(media, "-13.9%", -170 * push);
+        }
+
+        if (scene.id === "frame-03") {
+          const img = document.getElementById("karpathyImage");
+          const push = smooth(2, duration - 2, local);
+          setElement(img, { transform: `scale(${1 + push * 0.065}) translateY(${-120 * push}px)` });
+        }
+
+        if (scene.id === "frame-04") {
+          const card = scene.querySelector(".examples-card");
+          const media = scene.querySelectorAll(".examples-media > video");
+          const push = smooth(2, duration - 2, local);
+          setElement(card, { transform: `translateY(${-20 * push}px) scale(${0.985 + push * 0.025})` });
+          setMediaPan(media, "0px", -220 * push);
+        }
+
+        if (scene.id === "frame-05") {
+          const tom = scene.querySelector(".tom-card");
+          const media = scene.querySelectorAll(".tom-media > video");
+          const push = smooth(2, duration - 2, local);
+          setElement(tom, {
+            opacity: String(0.96 + 0.04 * push),
+            transform: `translateY(${-26 * push}px) scale(${0.985 + push * 0.025})`
+          });
+          setMediaPan(media, "-17.8%", -70 - 20 * push);
+        }
+
+        if (scene.id === "frame-06") {
+          const workflow = scene.querySelector(".workflow-card");
+          const media = scene.querySelectorAll(".workflow-media > video");
+          const push = smooth(2, duration - 2, local);
+          setElement(workflow, { transform: `translateY(${-28 * push}px) scale(${0.985 + push * 0.03})` });
+          setMediaPan(media, "0px", -280 * push);
+        }
+      }
+
+      function updateWipe(t) {
+        const cuts = [15, 45, 75, 110, 140];
+        let y = 100;
+        cuts.forEach((cut) => {
+          const inP = smooth(cut - 0.28, cut, t);
+          const outP = smooth(cut + 0.04, cut + 0.42, t);
+          const active = inP * (1 - outP);
+          if (active > 0.01) y = 100 - 200 * inP + 200 * outP;
+        });
+        wipe.style.transform = `translateY(${y}%)`;
+      }
+
+      function renderAt(t) {
+        const safeT = clamp(Number(t) || 0, 0, durationSeconds);
+        scenes.forEach((scene) => updateScene(scene, safeT));
+        updateWipe(safeT);
+        progressFill.style.width = `${(safeT / durationSeconds) * 100}%`;
+      }
+
+      class ManualTimeline {
+        constructor(duration) {
+          this.current = 0;
+          this.total = duration;
+          this.rate = 1;
+          this.playing = false;
+        }
+
+        pause() {
+          this.playing = false;
+          return this;
+        }
+
+        play() {
+          this.playing = true;
+          return this;
+        }
+
+        seek(value) {
+          this.current = clamp(Number(value) || 0, 0, this.total);
+          renderAt(this.current);
+          return this;
+        }
+
+        totalTime(value) {
+          return this.seek(value);
+        }
+
+        time() {
+          return this.current;
+        }
+
+        duration() {
+          return this.total;
+        }
+
+        timeScale(value) {
+          if (value === undefined) return this.rate;
+          this.rate = Number(value) || 1;
+          return this;
+        }
+      }
+
+      window.__timelines = window.__timelines || {};
+      const timeline = new ManualTimeline(durationSeconds);
+      timeline.seek(0);
+      window.__timelines.main = timeline;
+    </script>
+  </body>
+</html>
