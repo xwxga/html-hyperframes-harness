@@ -1,12 +1,5 @@
 # 02 Design Direction / 设计方向
 
-## Changelog / 变更日志
-
-| 时间 / Time | 作者 / Author | 变更 / Change |
-|---|---|---|
-| 2026-05-23 23:31 | Codex | Migrated the real-project design direction into the public golden example and removed non-example optional assets. / 将真实项目设计方向迁入公开 golden example，并移除非示例可选素材。 |
-| 2026-05-16 13:47 | Codex | Updated the Figma direction to six low-density key frames and made source-card scroll/pan/video motion a default requirement. |
-
 ## Source / 来源
 
 - Intake file / 意图文件: `01_intake.md`

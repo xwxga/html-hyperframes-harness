@@ -1,12 +1,5 @@
 # 03 Critical Frame Plan / 关键帧计划
 
-## Changelog / 变更日志
-
-| 时间 / Time | 作者 / Author | 变更 / Change |
-|---|---|---|
-| 2026-05-23 23:31 | Codex | Restored the complete real-project critical frame plan for the public golden example and rewired asset paths. / 为公开 golden example 恢复真实项目完整关键帧计划，并改成本地素材路径。 |
-| 2026-05-16 13:47 | Codex | Recorded the approved split from five frames to six frames, with Tom/html-anything and the user's workflow as separate full-frame beats. |
-
 ## Source / 来源
 
 - Intake file / 意图文件: `01_intake.md`

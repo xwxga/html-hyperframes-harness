@@ -1,12 +1,5 @@
 # 04 Render Plan / 生成交接
 
-## Changelog / 变更日志
-
-| 时间 / Time | 作者 / Author | 变更 / Change |
-|---|---|---|
-| 2026-05-23 23:31 | Codex | Migrated the real-project render plan into the public golden example and rewired assets to the local package. / 将真实项目 render plan 迁入公开 golden example，并改成本地素材路径。 |
-| 2026-05-16 14:02 | Codex | Revised the handoff to a 6-frame `index.html` preview, split Tom/html-anything from the workflow frame, retained the Tom tweet body, and cropped away the comment/bottom whitespace. |
-
 ## Status / 状态
 
 - Direction board / 方向板: `direction_board.html`

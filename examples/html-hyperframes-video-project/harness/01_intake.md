@@ -1,12 +1,5 @@
 # 01 Intake / 意图摄取
 
-## Changelog / 变更日志
-
-| 时间 / Time | 作者 / Author | 变更 / Change |
-|---|---|---|
-| 2026-05-23 23:31 | Codex | Migrated the full real-project intake into the public golden example and rewired asset paths. / 将真实项目完整 intake 迁入公开 golden example，并改成本地素材路径。 |
-| 2026-05-16 13:47 | Codex | Updated the intake to the approved 6-frame split and global source-card scroll/pan motion requirement. |
-
 ## Project / 项目
 
 - Project title / 项目标题: **HTML + HyperFrames 6-frame final-video harness**
