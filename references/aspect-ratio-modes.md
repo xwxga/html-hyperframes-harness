@@ -4,13 +4,14 @@
 
 | 时间 / Time | 作者 / Author | 变更 / Change |
 |---|---|---|
+| 2026-05-24 00:14 | Codex | Removed target-language from aspect mode rules. / 从画幅规则中移除目标表述。 |
 | 2026-05-17 00:08 | Sisyphus | Added horizontal and vertical Visual Review mode contract. |
 
 ## Purpose / 目的
 
-Visual Review may show horizontal and vertical layouts, but both modes must preserve the same content meaning and semantic target IDs.
+Visual Review may show horizontal and vertical layouts, but both modes must preserve the same content meaning, page IDs, and locked frame style.
 
-Visual Review 可以展示横版和竖版布局，但两种模式必须保留相同内容含义和语义目标 ID。
+Visual Review 可以展示横版和竖版布局，但两种模式必须保留相同内容含义、page ID 和已锁定关键帧风格。
 
 ## Modes / 模式
 
@@ -22,7 +23,7 @@ Visual Review 可以展示横版和竖版布局，但两种模式必须保留相
 ## Rules / 规则
 
 - Same page IDs across modes. / 两种模式共享相同 page ID。
-- Same comment target IDs across modes. / 两种模式共享相同 comment target ID。
+- Same locked frame style across modes. / 两种模式共享相同已锁定关键帧风格。
 - Aspect changes may alter crop, scale, and hierarchy but not mainline. / 画幅变化可改变裁切、缩放、层级，但不得改变主线。
 - Document crop/safe-area risk before final render plan. / 最终 render plan 前记录裁切和安全区风险。
 

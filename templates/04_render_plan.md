@@ -4,12 +4,12 @@
 
 | 时间 / Time | 作者 / Author | 变更 / Change |
 |---|---|---|
+| 2026-05-24 00:14 | Codex | Removed side-rail gates and added critical-frame style lock handoff. / 移除侧边栏门槛，并加入关键帧风格锁定交接。 |
+| 2026-05-23 17:26 | Codex | Updated the final generation gate to match Director Workbench, Visual System Lock, Motion Timeline, and Frames view. / 将最终生成门槛同步为 Director Workbench、Visual System Lock、Motion Timeline 和 Frames 视图。 |
 | 2026-05-18 16:22 | Sisyphus | Updated final generation gate for director-first board review and removed compact production handoff requirement. |
-| 2026-05-17 00:18 | Sisyphus | Added comment export, semantic target, and aspect-mode checks for final HyperFrames handoff. |
-| 2026-05-15 16:36 | Sisyphus | Added final drift check and what-changed handoff fields so render generation preserves locked narrative direction. |
-| 2026-05-15 11:12 | Sisyphus | Added pre-board convergence and compact production handoff checks. |
-| 2026-05-14 22:37 | Sisyphus | Added strict ready gate, review evidence, and final HyperFrames handoff constraints. |
-| 2026-05-14 17:58 | Sisyphus | Renumbered the render handoff and added Design Router and HyperFrames visual-principle fields. |
+| 2026-05-17 00:18 | Sisyphus | Added semantic target and aspect-mode checks for final HyperFrames handoff. |
+| 2026-05-15 16:36 | Sisyphus | Added pre-board convergence, compact production handoff checks, final drift check, and what-changed handoff fields so render generation preserves locked narrative direction. |
+| 2026-05-14 22:37 | Sisyphus | Renumbered the render handoff and added Design Router, HyperFrames visual-principle fields, strict ready gate, review evidence, and final handoff constraints. |
 | 2026-05-13 22:23 | Sisyphus | Created the MVP render-plan handoff template for HyperFrames Direction Harness runs. |
 
 ## Gate Status / 门槛状态
@@ -23,7 +23,6 @@ This file should only be created after `direction_board.html` has been reviewed 
 - Review evidence / 审查证据:
 - Pre-board convergence recorded / Board 前收敛已记录: yes / no / waived
 - HTML changes synced to Markdown / HTML 修改已同步回 Markdown: yes / no / pending
-- Comment JSON synced to `05_revision_plan.md` / 评论 JSON 已同步到 `05_revision_plan.md`: yes / no / not-used
 - Scope classification recorded / 修改范围分类已记录: yes / no / not-needed
 - Mainline lock respected / 主线锁定已遵守: yes / no / not-locked
 - Waiver if any / 如有豁免，说明:
@@ -44,6 +43,7 @@ This file should only be created after `direction_board.html` has been reviewed 
 
 - Primary Design Router style / 主 Design Router 风格:
 - Accent or reference style / 辅助或参考风格:
+- Critical-frame style route / 关键帧风格路线: HyperFrames default / user-selected route
 - Local design source paths / 本地设计来源路径:
 - Visual principles to preserve / 必须保留的视觉原则:
 - Anti-patterns to avoid / 必须避免的反模式:
@@ -75,17 +75,17 @@ Locked items that final HyperFrames generation must preserve:
 |---|---:|---|---|---|---|
 | 01 |  |  |  |  |  |
 
-## Semantic Target Handoff / 语义目标交接
+## Stable Metadata Handoff / 稳定 Metadata 交接
 
 Carry these stable IDs into final HTML where practical so future edits can map back to the reviewed board.
 
 尽量把这些稳定 ID 带入最终 HTML，方便未来修改回溯到已审查 board。
 
-| Target ID / 目标 ID | Final HTML metadata / 最终 HTML 元数据 | Source board target / 来源 board 目标 |
+| Target ID / 目标 ID | Final HTML metadata / 最终 HTML 元数据 | Source board object / 来源 board 对象 |
 |---|---|---|
-| page-01.entry | `data-page-id="page-01" data-critical-frame="entry"` | `data-comment-target-id="page-01.entry"` |
-| page-01.hero | `data-page-id="page-01" data-critical-frame="hero"` | `data-comment-target-id="page-01.hero"` |
-| page-01.transition | `data-page-id="page-01" data-critical-frame="transition"` | `data-comment-target-id="page-01.transition"` |
+| page-01.entry | `data-page-id="page-01" data-critical-frame="entry"` | `data-frame="frame-01"` |
+| page-01.hero | `data-page-id="page-01" data-critical-frame="hero"` | `data-frame="frame-01"` |
+| page-01.transition | `data-page-id="page-01" data-critical-frame="transition"` | `data-frame="frame-01"` |
 
 ## Text Hierarchy / 文案层级
 
@@ -142,11 +142,10 @@ data-continuity-anchor="..."
 
 - [ ] Sections/assets/mainline were confirmed before `direction_board.html` generation. / 章节、素材、主线已在生成 `direction_board.html` 前确认。
 - [ ] `direction_board.html` was director-first and preview-first. / `direction_board.html` 是导演优先、预览优先。
-- [ ] Director board includes rhythm storyboard, layout previews, keyframe previews, motion before/after, style critique, and side annotations. / 导演 board 包含节奏分镜、版面预览、关键帧预览、运动前后状态、风格检查和侧边批注。
+- [ ] Director Workbench includes Overview, Frames, Visual System Lock, Motion Timeline, Review Gate Summary, and explicit critical-frame style lock. / Director Workbench 包含 Overview、Frames、Visual System Lock、Motion Timeline、Review Gate Summary 和显式关键帧风格锁定。
 - [ ] `direction_board.html` reviewed or waived with reason. / `direction_board.html` 已审查或有理由豁免。
 - [ ] Review changes synced or marked pending. / 审查修改已同步或标记 pending。
-- [ ] Comment export is empty, synced, or waived. / 评论导出为空、已同步或已豁免。
-- [ ] Semantic target IDs are stable across reviewed aspect modes. / 语义目标 ID 在已审查画幅中保持稳定。
+- [ ] Stable frame metadata is preserved across reviewed aspect modes. / 稳定帧 metadata 在已审查画幅中保持一致。
 - [ ] Post-review scope classification is recorded or not needed. / Review 后修改范围已记录，或无需记录。
 - [ ] Mainline lock is respected; layout-only changes did not alter narrative truth. / 已遵守主线锁定；仅版式修改没有改变叙事事实。
 - [ ] Every final page maps to a planned Page. / 每个最终页面都对应已规划 Page。

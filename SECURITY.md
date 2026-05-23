@@ -4,6 +4,7 @@
 
 | Time / 时间 | Author / 作者 | Change / 变更 |
 |---|---|---|
+| 2026-05-24 03:25 | Codex | Removed obsolete review-note storage guidance for the strict public package. / 为严格公开包移除过时的审查笔记存储说明。 |
 | 2026-05-18 00:00 | Sisyphus | Added public security policy and V1 static safety boundaries. |
 
 ## Supported Scope / 支持范围
@@ -21,15 +22,11 @@ Open a GitHub security advisory or private issue if available. If not, open a no
 ## Do Not Include / 不要提交
 
 - API keys, tokens, passwords, cookies, private provider configuration. / API key、token、密码、cookie、私有供应商配置。
-- Real customer data or private review comments. / 真实客户数据或私有审查评论。
+- Real customer data, private assets, or unpublished review notes. / 真实客户数据、私有素材或未公开审查笔记。
 - `.env`, `.sisyphus/`, `.worktree-id`, credentials, private local paths. / `.env`、`.sisyphus/`、`.worktree-id`、凭证、私有本地路径。
 
-## Static Comment Layer / 静态评论层
+## Release Check / 发布检查
 
-The comment layer stores review comments in browser `localStorage` and exports JSON. Treat exported comments as project planning data and review them before publishing.
+Run `node scripts/validate-static.js` before release. Review bundled examples for private paths, unpublished assets, and private planning notes.
 
-评论层把审查评论保存在浏览器 `localStorage`，并导出 JSON。导出的评论属于项目计划数据，公开前必须审查。
-
-Run `node scripts/validate-static.js` before release.
-
-发布前运行 `node scripts/validate-static.js`。
+发布前运行 `node scripts/validate-static.js`。同时检查随包示例中是否包含私人路径、未公开素材或私有计划笔记。

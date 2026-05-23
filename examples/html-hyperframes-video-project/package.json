@@ -1,0 +1,12 @@
+{
+  "name": "html-hyperframes-5frame-final",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "npx --yes hyperframes@0.5.3 lint && npx --yes hyperframes@0.5.3 validate && npx --yes hyperframes@0.5.3 inspect",
+    "snapshot": "npx --yes hyperframes@0.5.3 snapshot",
+    "preview": "npx --yes hyperframes@0.5.3 preview",
+    "render": "npx --yes hyperframes@0.5.3 render --quality high --output renders/html_hyperframes_5frame_final.mp4",
+    "render:draft": "npx --yes hyperframes@0.5.3 render --quality draft --output renders/html_hyperframes_5frame_draft.mp4"
+  }
+}

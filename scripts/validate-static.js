@@ -17,18 +17,39 @@ const requiredFiles = [
   "docs/testing.md",
   "board/direction_board.template.html",
   "board/direction_board.css",
-  "board/comment-layer.js",
+  "board/workbench-controls.js",
   "templates/01_intake.md",
   "templates/02_design_direction.md",
   "templates/03_critical_frame_plan.md",
   "templates/04_render_plan.md",
   "templates/05_revision_plan.md",
-  "examples/asset-first-board/direction_board.skeleton.html",
-  "examples/asset-first-board/review_comments.example.json",
-  "examples/luqee-workflow-film-v2-harness/direction_board.html",
+  "examples/html-hyperframes-video-project/README.md",
+  "examples/html-hyperframes-video-project/harness/direction_board.html",
+  "examples/html-hyperframes-video-project/harness/01_intake.md",
+  "examples/html-hyperframes-video-project/harness/02_design_direction.md",
+  "examples/html-hyperframes-video-project/harness/03_critical_frame_plan.md",
+  "examples/html-hyperframes-video-project/harness/04_render_plan.md",
+  "examples/html-hyperframes-video-project/index.html",
+  "examples/html-hyperframes-video-project/hyperframes.json",
+  "examples/html-hyperframes-video-project/package.json",
+  "examples/html-hyperframes-video-project/renders/README.md",
+  "examples/html-hyperframes-video-project/renders/html_hyperframes_5frame_preview.mp4",
+  "examples/html-hyperframes-video-project/assets/thariq_x_first_panel_render.mp4",
+  "examples/html-hyperframes-video-project/assets/thariq_x_first_panel_first_frame.png",
+  "examples/html-hyperframes-video-project/assets/karpathy_html_quote.png",
+  "examples/html-hyperframes-video-project/assets/html_effectiveness_site_scroll_render.mp4",
+  "examples/html-hyperframes-video-project/assets/html_effectiveness_site_scroll_first_frame.png",
+  "examples/html-hyperframes-video-project/assets/tuturetom_main_video_10s_render.mp4",
+  "examples/html-hyperframes-video-project/assets/tuturetom_main_video_10s_first_frame.png",
+  "examples/html-hyperframes-video-project/assets/figma_direction_board_scroll_render.mp4",
+  "examples/html-hyperframes-video-project/assets/figma_direction_board_scroll_first_frame.png",
+  "examples/html-hyperframes-video-project/snapshots/frame-00-at-0pct.png",
+  "examples/html-hyperframes-video-project/snapshots/frame-01-at-25pct.png",
+  "examples/html-hyperframes-video-project/snapshots/frame-02-at-50pct.png",
+  "examples/html-hyperframes-video-project/snapshots/frame-03-at-75pct.png",
+  "examples/html-hyperframes-video-project/snapshots/frame-04-at-100pct.png",
   "references/direction-board-contract.md",
   "references/visual-board-patterns.md",
-  "references/comment-layer-contract.md",
   "references/aspect-ratio-modes.md",
   "references/review-gates.md"
 ];
@@ -37,12 +58,15 @@ const requiredStages = [
   "director-workbench",
   "overview-view",
   "director-cover",
+  "visual-contact-sheet",
+  "asset-wall",
   "rhythm-storyboard",
+  "section-storyboard",
+  "critical-frame-mockups",
   "visual-system-lock",
   "motion-timeline",
   "review-gate-summary",
-  "frames-workbench",
-  "annotation-layer"
+  "frames-workbench"
 ];
 
 const forbiddenDirectorStages = [
@@ -71,8 +95,7 @@ for (const file of requiredFiles) {
 
 for (const file of [
   "board/direction_board.template.html",
-  "examples/asset-first-board/direction_board.skeleton.html",
-  "examples/luqee-workflow-film-v2-harness/direction_board.html"
+  "examples/html-hyperframes-video-project/harness/direction_board.html"
 ]) {
   if (!fs.existsSync(resolve(file))) continue;
   const html = read(file);
@@ -87,22 +110,12 @@ for (const file of [
     if (index < lastIndex) errors.push(`${file} has out-of-order stage: ${stage}`);
     lastIndex = index;
   }
-  if (!html.includes("data-comment-target-id")) errors.push(`${file} missing semantic comment targets`);
   if (!html.includes('data-lang-switch="en"') || !html.includes('data-lang-switch="zh"')) errors.push(`${file} missing global language switch`);
   if (!html.includes('data-view-switch="overview"') || !html.includes('data-view-switch="frames"')) errors.push(`${file} missing Overview/Frames view switch`);
   if (!html.includes('data-frame-select="frame-01"')) errors.push(`${file} missing frame selector controls`);
   if (!html.includes('data-lang="en"')) errors.push(`${file} must default to English with body data-lang="en"`);
-  validateTopbarIsNotCommentable(file, html);
   validateFrameMotionSources(file, html);
-  for (const selector of [
-    'data-comment-target-type="section"',
-    'data-comment-target-type="system"',
-    'data-comment-target-type="keyframe"',
-    'data-comment-target-type="motion"',
-    'data-comment-target-type="frame"'
-  ]) {
-    if (!html.includes(selector)) errors.push(`${file} missing ${selector}`);
-  }
+  if (!html.includes("HyperFrames default")) errors.push(`${file} missing explicit HyperFrames default frame style declaration`);
   for (const stage of forbiddenDirectorStages) {
     if (html.includes(`data-stage="${stage}"`)) errors.push(`${file} contains forbidden director-stage: ${stage}`);
   }
@@ -114,7 +127,10 @@ for (const file of [
   }
 }
 
-validateCommentJson("examples/asset-first-board/review_comments.example.json");
+validateSingleGoldenExample();
+validateNoForbiddenExampleReferences();
+validateStrictPublicPackage();
+validateGoldenExampleQuality();
 validateGitignore();
 validateNoTrackedLocalState();
 scanFiles();
@@ -140,38 +156,8 @@ function read(file) {
   return fs.readFileSync(resolve(file), "utf8");
 }
 
-function validateCommentJson(file) {
-  if (!fs.existsSync(resolve(file))) return;
-  let parsed;
-  try {
-    parsed = JSON.parse(read(file));
-  } catch (error) {
-    errors.push(`${file} is invalid JSON: ${error.message}`);
-    return;
-  }
-  if (!Array.isArray(parsed)) {
-    errors.push(`${file} must be an array`);
-    return;
-  }
-  const required = ["comment_id", "target_type", "target_id", "selector", "scope", "comment", "priority", "status"];
-  parsed.forEach((comment, index) => {
-    for (const key of required) {
-      if (!comment || typeof comment[key] !== "string" || comment[key].trim() === "") {
-        errors.push(`${file}[${index}] missing string field: ${key}`);
-      }
-    }
-  });
-}
-
-function validateTopbarIsNotCommentable(file, html) {
-  const topbarMatch = html.match(/<header\b[^>]*class="[^"]*workbench-topbar[^"]*"[^>]*>/);
-  if (!topbarMatch) {
-    errors.push(`${file} missing workbench topbar`);
-    return;
-  }
-  if (/data-commentable="true"|data-comment-target-(type|id)=/.test(topbarMatch[0])) {
-    errors.push(`${file} topbar must not be commentable; view/language controls should not become annotation targets`);
-  }
+function countMatches(value, pattern) {
+  return Array.from(value.matchAll(pattern)).length;
 }
 
 function validateFrameMotionSources(file, html) {
@@ -188,9 +174,139 @@ function validateFrameMotionSources(file, html) {
   if (count === 0) errors.push(`${file} missing inspectable data-frame artboards`);
 }
 
+function validateSingleGoldenExample() {
+  const examplesDir = resolve("examples");
+  if (!fs.existsSync(examplesDir)) return;
+  const dirs = fs.readdirSync(examplesDir, { withFileTypes: true }).filter((entry) => entry.isDirectory()).map((entry) => entry.name);
+  if (dirs.length !== 1 || dirs[0] !== "html-hyperframes-video-project") {
+    errors.push(`examples must contain only html-hyperframes-video-project; found: ${dirs.join(", ") || "(none)"}`);
+  }
+}
+
+function validateNoForbiddenExampleReferences() {
+  const forbidden = [
+    "markdown-to-html-workbench",
+    "asset-first-board",
+    "luqee-workflow-film-v2-harness",
+    "LUQEE",
+    "LuQEE",
+    "luqee"
+  ];
+  for (const file of walk(root)) {
+    const rel = path.relative(root, file);
+    if (rel === "scripts/validate-static.js") continue;
+    if (!isTextFile(rel)) continue;
+    const content = fs.readFileSync(file, "utf8");
+    for (const token of forbidden) {
+      if (content.includes(token)) errors.push(`Forbidden retired example reference in ${rel}: ${token}`);
+    }
+  }
+}
+
+function validateStrictPublicPackage() {
+  const readme = fs.existsSync(resolve("README.md")) ? read("README.md") : "";
+  if (!readme.includes("unofficial independent community package")) {
+    errors.push("README.md must clearly position this as an unofficial independent community package");
+  }
+  if (!readme.includes("not a HyperFrames fork") || !readme.includes("not an OpenDesign fork")) {
+    errors.push("README.md must clarify that this repo is not a HyperFrames or OpenDesign fork");
+  }
+
+  const retiredPaths = [
+    "docs/director-workbench-upgrade-brief.md",
+    "specs/2026-05-13-hyperframes-direction-harness-mvp-spec.md",
+    "board/comment-layer.js",
+    "references/comment-layer-contract.md"
+  ];
+  for (const retiredPath of retiredPaths) {
+    if (fs.existsSync(resolve(retiredPath))) errors.push(`Retired public-package file still exists: ${retiredPath}`);
+  }
+
+  const oldCommentSystemTokens = [
+    "comment-layer",
+    "data-comment",
+    "comment export",
+    "side annotation rail",
+    "static comment layer",
+    "review_comments.example.json"
+  ];
+  for (const file of walk(root)) {
+    const rel = path.relative(root, file);
+    if (rel === "scripts/validate-static.js") continue;
+    if (!isTextFile(rel)) continue;
+    const content = fs.readFileSync(file, "utf8").toLowerCase();
+    for (const token of oldCommentSystemTokens) {
+      if (content.includes(token)) errors.push(`Old comment-system token in ${rel}: ${token}`);
+    }
+  }
+}
+
+function validateGoldenExampleQuality() {
+  const boardFile = "examples/html-hyperframes-video-project/harness/direction_board.html";
+  const planFile = "examples/html-hyperframes-video-project/harness/03_critical_frame_plan.md";
+  const renderPlanFile = "examples/html-hyperframes-video-project/harness/04_render_plan.md";
+  const finalIndexFile = "examples/html-hyperframes-video-project/index.html";
+  if (![boardFile, planFile, renderPlanFile, finalIndexFile].every((file) => fs.existsSync(resolve(file)))) return;
+
+  const board = read(boardFile);
+  const framePlan = read(planFile);
+  const renderPlan = read(renderPlanFile);
+  const finalIndex = read(finalIndexFile);
+  const lockedCopy = [
+    "OPENING SLOT",
+    "网页，正在变成新的编导台",
+    "人类吃信息，靠视觉和声音",
+    "不是文档，是可看的例子",
+    "网页输出，已经有人在做",
+    "先生成编导台，再生成视频"
+  ];
+
+  for (const copy of lockedCopy) {
+    if (!board.includes(copy)) errors.push(`${boardFile} missing locked copy: ${copy}`);
+    if (!renderPlan.includes(copy)) errors.push(`${renderPlanFile} missing locked copy: ${copy}`);
+    if (!finalIndex.includes(copy)) errors.push(`${finalIndexFile} missing locked copy: ${copy}`);
+  }
+
+  const frames = new Set(Array.from(board.matchAll(/data-frame="(frame-\d+)"/g)).map((match) => match[1]));
+  if (frames.size < 6) errors.push(`${boardFile} must expose at least 6 data-frame artboards; found ${frames.size}`);
+
+  const frameSelectors = new Set(Array.from(board.matchAll(/data-frame-select="(frame-\d+)"/g)).map((match) => match[1]));
+  if (frameSelectors.size < 6) errors.push(`${boardFile} must expose at least 6 frame selector controls; found ${frameSelectors.size}`);
+
+  const assetCards = countMatches(board, /data-asset-status="must-use"/g);
+  if (assetCards < 5) errors.push(`${boardFile} must expose at least 5 must-use asset cards; found ${assetCards}`);
+
+  if (!board.includes("HyperFrames default: white grid canvas")) {
+    errors.push(`${boardFile} must explicitly lock the critical-frame style to the HyperFrames default`);
+  }
+
+  const realMedia = countMatches(board, /<(video|img)\b/g);
+  if (realMedia < 5) errors.push(`${boardFile} must show at least 5 real media elements; found ${realMedia}`);
+
+  for (const stage of ["visual-contact-sheet", "asset-wall", "section-storyboard", "critical-frame-mockups"]) {
+    if (!board.includes(`data-stage="${stage}"`)) errors.push(`${boardFile} missing asset-first stage: ${stage}`);
+  }
+
+  if (framePlan.length < 12000) errors.push(`${planFile} is too short for the golden example; preserve the full critical-frame plan instead of a summary`);
+  if (!framePlan.includes("Entry") || !framePlan.includes("Hero") || !framePlan.includes("Transition")) {
+    errors.push(`${planFile} must preserve Entry / Hero / Transition critical-frame planning`);
+  }
+
+  for (const asset of [
+    "thariq_x_first_panel_render.mp4",
+    "karpathy_html_quote.png",
+    "html_effectiveness_site_scroll_render.mp4",
+    "tuturetom_main_video_10s_render.mp4",
+    "figma_direction_board_scroll_render.mp4"
+  ]) {
+    if (!board.includes(asset)) errors.push(`${boardFile} missing real asset reference: ${asset}`);
+    if (!renderPlan.includes(asset)) errors.push(`${renderPlanFile} missing real asset reference: ${asset}`);
+  }
+}
+
 function validateGitignore() {
   const gitignore = fs.existsSync(resolve(".gitignore")) ? read(".gitignore") : "";
-  for (const entry of [".env", ".worktree-id", ".sisyphus/"]) {
+  for (const entry of [".DS_Store", ".env", ".worktree-id", ".sisyphus/"]) {
     if (!gitignore.split(/\r?\n/).includes(entry)) errors.push(`.gitignore missing ${entry}`);
   }
 }
@@ -209,6 +325,7 @@ function scanFiles() {
 
   for (const file of walk(root)) {
     const rel = path.relative(root, file);
+    if (path.basename(file) === ".DS_Store") errors.push(`Local system file must not be published: ${rel}`);
     const stat = fs.statSync(file);
     if (stat.size > maxBytes) errors.push(`Large file over 5MB: ${rel}`);
     if (!isTextFile(rel)) continue;

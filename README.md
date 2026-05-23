@@ -4,18 +4,26 @@
 
 | Time / 时间 | Author / 作者 | Change / 变更 |
 |---|---|---|
+| 2026-05-24 03:25 | Codex | Prepared the strict public release package, clarified unofficial independent positioning, and removed legacy/comment artifacts. / 整理严格公开发布包，明确非官方独立定位，并移除旧版与评论相关 artifact。 |
+| 2026-05-23 23:31 | Codex | Restored asset-first Director Workbench quality gates and rebuilt the real HyperFrames example around the full 6-frame plan. / 恢复素材优先的 Director Workbench 质量门槛，并围绕完整 6 帧计划重建真实 HyperFrames 示例。 |
 | 2026-05-19 22:31 | Sisyphus | Upgraded the review artifact wording to Director Workbench v1.5 with Overview/Frames views. / 将审查 artifact 文案升级为 Director Workbench v1.5，并加入 Overview/Frames 视图。 |
-| 2026-05-18 16:22 | Sisyphus | Reframed the public harness around director-first preview boards, language switching, and side annotations. |
-| 2026-05-18 00:00 | Sisyphus | Added root GitHub Pages landing page note and validator hardening follow-up. |
-| 2026-05-18 00:00 | Sisyphus | Added MIT license decision, public project docs, static validation, testing, and GitHub Pages demo references. |
-| 2026-05-17 00:06 | Sisyphus | Added public v1 positioning, canonical template sequence, Visual Review/comment loop, and explicit non-goals. |
-| 2026-05-16 21:24 | Codex | Published the portable GitHub package with reusable harness docs, templates, references, and a bundled LUQEE example. |
+| 2026-05-18 16:22 | Sisyphus | Reframed the public harness around director-first preview boards, language switching, GitHub Pages demo notes, validation, and public project docs. |
+| 2026-05-17 00:06 | Sisyphus | Added public v1 positioning, canonical template sequence, Visual Review loop, and explicit non-goals. |
+| 2026-05-16 21:24 | Codex | Published the portable GitHub package with reusable harness docs, templates, references, and a bundled example. |
 
 ## What This Is / 这是什么
 
-HTML HyperFrames Harness is a public, reusable, agent-facing pre-generation harness for HyperFrames videos.
+HTML HyperFrames Harness is an unofficial independent community package for HyperFrames workflows.
 
-HTML HyperFrames Harness 是一个公开、可复用、给 Agent 使用的 HyperFrames 生成前 Harness。它用于在生成最终 HyperFrames `index.html` 之前，先通过 **Director Workbench** 形态的 `direction_board.html` 锁定节奏、视觉系统、逐帧意图、素材运动和评论。
+HTML HyperFrames Harness 是一个面向 HyperFrames workflow 的非官方、独立社区包。
+
+It provides a reusable, agent-facing **Director Workbench** before final HyperFrames render: `direction_board.html` locks rhythm, visual system, critical-frame style, frame-by-frame intent, asset motion, and final `index.html` mapping.
+
+它提供一个可复用、给 Agent 使用的 **Director Workbench**：在最终 HyperFrames render 之前，用 `direction_board.html` 锁定节奏、视觉系统、关键帧风格、逐帧意图、素材运动，以及到最终 `index.html` 的映射。
+
+This repository is not a HyperFrames fork, not an OpenDesign fork, and not affiliated with or endorsed by HyperFrames unless accepted upstream. HyperFrames is the target workflow; Figma-like/OpenDesign-style language is used only to describe the workbench UI pattern.
+
+本仓库不是 HyperFrames fork，不是 OpenDesign fork；除非被上游接受，否则不代表 HyperFrames 官方。HyperFrames 是目标 workflow；Figma-like / OpenDesign-style 只是用来描述 workbench 的界面语言。
 
 It is a visual decision system, not a renderer or media-production pipeline.
 
@@ -26,13 +34,13 @@ The core rule is simple:
 核心规则很简单：
 
 - Markdown files are the source of truth.
-- `direction_board.html` is the Director Workbench artifact and uses a fixed template.
-- Review comments live in a weak side annotation rail, export JSON, and sync back to Markdown.
+- `direction_board.html` is the Director Workbench artifact: Pattern W shell, Pattern A asset-first substance.
+- Critical-frame style defaults to the HyperFrames frame style and is shown explicitly in the Frames Inspector.
 - Final HyperFrames generation starts only after `04_render_plan.md` is marked ready.
 
 - Markdown 文件是事实源。
-- `direction_board.html` 是 Director Workbench artifact，并使用固定模板。
-- 审查评论位于弱化侧边批注栏，导出 JSON，并同步回 Markdown。
+- `direction_board.html` 是 Director Workbench artifact：Pattern W 外壳，Pattern A 素材优先内容。
+- 关键帧风格默认使用 HyperFrames 画面风格，并在 Frames Inspector 中显式展示。
 - 只有 `04_render_plan.md` 标记 ready 后，才进入最终 HyperFrames 生成。
 
 ## What This Is Not / 不是什么
@@ -73,21 +81,17 @@ The core rule is simple:
 ├── board/
 │   ├── direction_board.template.html
 │   ├── direction_board.css
-│   └── comment-layer.js
+│   └── workbench-controls.js
 ├── references/
 │   ├── aspect-ratio-modes.md
 │   ├── asset-manifest-contract.md
 │   ├── ai-media-brief-contract.md
-│   ├── comment-layer-contract.md
 │   ├── direction-board-contract.md
 │   ├── motion-intent-contract.md
 │   ├── review-gates.md
 │   └── visual-board-patterns.md
-├── specs/
-│   └── 2026-05-13-hyperframes-direction-harness-mvp-spec.md
 └── examples/
-    ├── asset-first-board/
-    └── luqee-workflow-film-v2-harness/
+    └── html-hyperframes-video-project/
 ```
 
 ## License / 许可证
@@ -106,8 +110,8 @@ Why MIT: this package is a reusable skill/template harness, and MIT keeps public
 2. Fill `01_intake.md` from the user brief and real assets.
 3. Choose and record the visual route in `02_design_direction.md`.
 4. Plan pages and critical frames in `03_critical_frame_plan.md`.
-5. Use `board/direction_board.template.html` and `references/visual-board-patterns.md` to build and review a director-first `direction_board.html`.
-6. Let reviewers comment from the side annotation rail on selectable HTML targets; export comments to JSON and sync them into `05_revision_plan.md`.
+5. Use `board/direction_board.template.html` and `references/visual-board-patterns.md` to build and review a Director Workbench that starts with real assets, contact sheet, storyboard, and frame mockups.
+6. Review the Frames view and confirm the Inspector declares the critical-frame style route, motion intent, and final source mapping.
 7. Sync approved review changes back to Markdown.
 8. Mark `04_render_plan.md` ready, then hand off to the HyperFrames skill to generate the final `index.html`.
 
@@ -115,16 +119,26 @@ Why MIT: this package is a reusable skill/template harness, and MIT keeps public
 2. 根据用户 brief 和真实素材填写 `01_intake.md`。
 3. 在 `02_design_direction.md` 中选择并记录视觉路线。
 4. 在 `03_critical_frame_plan.md` 中规划页面和关键帧。
-5. 使用 `board/direction_board.template.html` 和 `references/visual-board-patterns.md` 构建并审查导演优先的 `direction_board.html`。
-6. 审查者可以在侧边批注栏中对 HTML 可选目标写评论；评论导出为 JSON，并同步进 `05_revision_plan.md`。
+5. 使用 `board/direction_board.template.html` 和 `references/visual-board-patterns.md` 构建并审查 Director Workbench；它必须先展示真实素材、contact sheet、storyboard 和 frame mockups。
+6. 审查 Frames 视图，并确认 Inspector 显式声明关键帧风格路线、motion intent 和最终 source 映射。
 7. 把批准后的审查修改同步回 Markdown。
 8. 将 `04_render_plan.md` 标记 ready 后，再交给 HyperFrames skill 生成最终 `index.html`。
 
 ## Example / 示例
 
-`examples/luqee-workflow-film-v2-harness/` is a bundled example with Markdown plans, a review HTML board, and local image assets so the board can be opened directly.
+`examples/html-hyperframes-video-project/` is the bundled public example. It contains the real 6-frame Director Workbench, full harness Markdown, the final HyperFrames `index.html`, `hyperframes.json`, `package.json`, local assets, snapshots, a lightweight preview MP4, and render notes.
 
-`examples/luqee-workflow-film-v2-harness/` 是一个带素材的完整示例，包含 Markdown 计划、审查 HTML board 和本地图片资产，可以直接打开 HTML 查看结构。
+`examples/html-hyperframes-video-project/` 是唯一公开示例，包含真实 6 帧 Director Workbench、完整 harness Markdown、最终 HyperFrames `index.html`、`hyperframes.json`、`package.json`、本地素材、快照、轻量预览 MP4 和渲染说明。
+
+## Relationship To HyperFrames / 与 HyperFrames 的关系
+
+This package sits before final HyperFrames generation. It helps a human reviewer and the next agent agree on what should be rendered before the final `index.html` is produced.
+
+本包位于最终 HyperFrames 生成之前。它帮助人类 reviewer 和下一个 agent 在最终 `index.html` 产出前，先对“到底要渲染什么”达成一致。
+
+The final HyperFrames composition remains separate. This harness only provides the review layer, templates, contracts, and validation gates.
+
+最终 HyperFrames composition 保持独立。本 harness 只提供审查层、模板、契约和验证门槛。
 
 ## Testing / 测试
 
@@ -140,9 +154,9 @@ node scripts/validate-static.js
 node scripts/validate-static.js
 ```
 
-The validator checks required files, required board `data-stage` markers, comment JSON, large files, suspicious secrets, and local-state ignore rules. More detail: `docs/testing.md`.
+The validator checks required files, required board `data-stage` markers, golden-example locked copy, frame count, asset targets, retired example references, large files, suspicious secrets, and local-state ignore rules. More detail: `docs/testing.md`.
 
-验证脚本会检查必需文件、必需 board `data-stage` 标记、评论 JSON、大文件、可疑密钥和本地状态忽略规则。更多说明见 `docs/testing.md`。
+验证脚本会检查必需文件、必需 board `data-stage` 标记、golden example 锁定文案、frame 数量、素材目标、废弃示例引用、大文件、可疑密钥和本地状态忽略规则。更多说明见 `docs/testing.md`。
 
 ## Demo / 演示
 

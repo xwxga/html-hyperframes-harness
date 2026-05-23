@@ -7,36 +7,41 @@
     <style>
       :root { color-scheme: light; --bg: #eef3f7; --ink: #111821; --muted: #66727e; --paper: #fff; --line: #d6dde5; --accent: #1f6feb; }
       * { box-sizing: border-box; }
-      body { margin: 0; background: radial-gradient(circle at 20% 0%, #fff 0, transparent 32rem), var(--bg); color: var(--ink); font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.5; }
+      body { margin: 0; background: var(--bg); color: var(--ink); font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.5; }
       main { width: min(1060px, calc(100vw - 32px)); margin: 0 auto; padding: 72px 0; }
-      h1 { margin: 0; font-size: clamp(2.8rem, 8vw, 6.8rem); line-height: .88; letter-spacing: -.07em; }
-      h2 { margin-top: 42px; font-size: clamp(1.6rem, 3vw, 2.6rem); letter-spacing: -.04em; }
+      h1 { margin: 0; font-size: 6rem; line-height: .92; letter-spacing: 0; }
+      h2 { margin-top: 42px; font-size: 2.3rem; letter-spacing: 0; }
       p { color: var(--muted); max-width: 760px; }
       .eyebrow { color: var(--accent); font-size: .78rem; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
       .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
-      .card { min-height: 230px; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; border: 1px solid var(--line); border-radius: 26px; background: rgba(255,255,255,.9); box-shadow: 0 20px 50px rgba(15,23,42,.1); }
+      .card { min-height: 230px; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.9); box-shadow: 0 20px 50px rgba(15,23,42,.1); }
       .card strong { display: block; font-size: 1.35rem; line-height: 1.1; color: var(--ink); }
       a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
       code { background: rgba(17,24,33,.08); padding: 2px 6px; border-radius: 6px; }
-      @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+      @media (max-width: 760px) {
+        main { padding: 40px 0; }
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 1.7rem; }
+        .grid { grid-template-columns: 1fr; }
+      }
     </style>
   </head>
   <body>
     <main>
       <p class="eyebrow">Public V1 Demo / 公开 V1 演示</p>
       <h1>HTML HyperFrames Harness</h1>
-      <p>Review rhythm, shots, layouts, locked main copy, asset motion, style consistency, and side annotations before final HyperFrames <code>index.html</code> generation.</p>
-      <p>在生成最终 HyperFrames <code>index.html</code> 前，先审查节奏、镜头、版面、已锁定主文字、素材运动、风格一致性和侧边批注。</p>
+      <p>Review the real 6-frame Director Workbench, a lightweight render preview, and the final HyperFrames source from one public demo.</p>
+      <p>在一个公开 demo 中查看真实 6 帧 Director Workbench、轻量渲染预览和最终 HyperFrames source。</p>
 
       <section class="grid" aria-label="Demo links">
-        <article class="card"><strong>Director Board Template / 导演 Board 模板</strong><p>Reusable static director preview surface with one-language-at-a-time UI and side annotation export.</p><a href="../board/direction_board.template.html">Open template</a></article>
-        <article class="card"><strong>Pattern Skeleton / 模式骨架</strong><p>Minimal Pattern D skeleton with director stages and semantic comment targets.</p><a href="../examples/asset-first-board/direction_board.skeleton.html">Open skeleton</a></article>
-        <article class="card"><strong>LUQEE Example / LUQEE 示例</strong><p>Bundled example rewritten as a director-first preview board.</p><a href="../examples/luqee-workflow-film-v2-harness/direction_board.html">Open LUQEE board</a></article>
+        <article class="card"><strong>Director Workbench / 导演工作台</strong><p>Open the asset-first 6-frame review layer for the real generated HyperFrames video project.</p><a href="../examples/html-hyperframes-video-project/harness/direction_board.html">Open workbench</a></article>
+        <article class="card"><strong>Render Preview / 渲染预览</strong><p>Open a small preview MP4 derived from the final render without committing the 143 MB output.</p><a href="../examples/html-hyperframes-video-project/renders/html_hyperframes_5frame_preview.mp4">Open preview</a></article>
+        <article class="card"><strong>Final HyperFrames Source / 最终 Composition 源码</strong><p>Open the renderable <code>index.html</code>. HyperFrames scrubs its timeline during capture.</p><a href="../examples/html-hyperframes-video-project/index.html">Open final index</a></article>
       </section>
 
       <h2>Validation / 验证</h2>
-      <p>Run <code>node scripts/validate-static.js</code> before publishing. It checks required files, director board stages, language switch, semantic targets, comment JSON, large files, and suspicious secrets.</p>
-      <p>发布前运行 <code>node scripts/validate-static.js</code>。它会检查必需文件、导演版 board stage、语言切换、语义目标、评论 JSON、大文件和可疑密钥。</p>
+      <p>Run <code>node scripts/validate-static.js</code> before publishing. It checks required files, director board stages, language switch, golden-example frames, locked copy, assets, retired references, large files, and suspicious secrets.</p>
+      <p>发布前运行 <code>node scripts/validate-static.js</code>。它会检查必需文件、导演版 board stage、语言切换、golden example 帧数、锁定文案、素材、退役引用、大文件和可疑密钥。</p>
     </main>
   </body>
 </html>

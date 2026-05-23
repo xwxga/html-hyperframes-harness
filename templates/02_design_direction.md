@@ -4,9 +4,10 @@
 
 | 时间 / Time | 作者 / Author | 变更 / Change |
 |---|---|---|
-| 2026-05-18 16:22 | Sisyphus | Reframed board bias fields for director-first previews, language switch, and side annotations. |
+| 2026-05-24 00:14 | Codex | Replaced target planning with explicit critical-frame style direction. / 将目标规划替换为显式关键帧风格方向。 |
+| 2026-05-18 16:22 | Sisyphus | Reframed board bias fields for director-first previews and language switch. |
 | 2026-05-17 00:42 | Sisyphus | Clarified that final HTML source-of-truth wording applies only after render handoff, not to the review board. |
-| 2026-05-17 00:18 | Sisyphus | Added aspect-mode and semantic comment-target requirements for public Visual Review boards. |
+| 2026-05-17 00:18 | Sisyphus | Added aspect-mode requirements for public Visual Review boards. |
 | 2026-05-15 11:12 | Sisyphus | Clarified that design direction supports an asset-first visual board rather than a production/compliance board. |
 | 2026-05-14 22:37 | Sisyphus | Added concrete route gate, non-generic visual rules, and design readiness checks. |
 | 2026-05-14 17:58 | Sisyphus | Added the Design Router direction template for HyperFrames Direction Harness runs. |
@@ -124,7 +125,8 @@ Write motion direction, not GSAP code.
 - Motion before/after priority / 运动前后状态优先级:
 - Style critique priority / 风格检查优先级:
 - Language switch requirement / 语言切换要求: English default, Chinese optional, one visible language at a time
-- Semantic comment target strategy / 语义评论目标策略: page-id + layout-id + frame-id + asset-id
+- Critical-frame style route / 关键帧风格路线: HyperFrames default unless user explicitly overrides it
+- Frame style rule / 关键帧风格规则: white grid canvas, black linework, green status dot, sparse title-card copy, source-card evidence
 
 ## Anti-Patterns / 反模式
 
