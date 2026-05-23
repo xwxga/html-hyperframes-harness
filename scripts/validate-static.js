@@ -9,12 +9,15 @@ const warnings = [];
 
 const requiredFiles = [
   "README.md",
+  "README.zh-CN.md",
   "SKILL.md",
   "LICENSE",
   "CONTRIBUTING.md",
   "SECURITY.md",
   "CODE_OF_CONDUCT.md",
   "docs/testing.md",
+  "docs/media/director-workbench-overview.png",
+  "docs/media/director-workbench-frames.png",
   "board/direction_board.template.html",
   "board/direction_board.css",
   "board/workbench-controls.js",
@@ -136,17 +139,17 @@ validateNoTrackedLocalState();
 scanFiles();
 
 if (warnings.length) {
-  console.log("Warnings / 警告:");
+  console.log("Warnings:");
   for (const warning of warnings) console.log(`- ${warning}`);
 }
 
 if (errors.length) {
-  console.error("Static validation failed / 静态验证失败:");
+  console.error("Static validation failed:");
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
 
-console.log("Static validation passed / 静态验证通过");
+console.log("Static validation passed");
 
 function resolve(file) {
   return path.join(root, file);
@@ -205,11 +208,18 @@ function validateNoForbiddenExampleReferences() {
 
 function validateStrictPublicPackage() {
   const readme = fs.existsSync(resolve("README.md")) ? read("README.md") : "";
+  const chineseReadme = fs.existsSync(resolve("README.zh-CN.md")) ? read("README.zh-CN.md") : "";
   if (!readme.includes("unofficial independent community package")) {
     errors.push("README.md must clearly position this as an unofficial independent community package");
   }
   if (!readme.includes("not a HyperFrames fork") || !readme.includes("not an OpenDesign fork")) {
     errors.push("README.md must clarify that this repo is not a HyperFrames or OpenDesign fork");
+  }
+  if (/changelog/i.test(readme)) errors.push("README.md must not contain a changelog");
+  if (!readme.includes("README.zh-CN.md")) errors.push("README.md must link to README.zh-CN.md for language switching");
+  if (!chineseReadme.includes("README.md")) errors.push("README.zh-CN.md must link back to README.md");
+  for (const image of ["docs/media/director-workbench-overview.png", "docs/media/director-workbench-frames.png"]) {
+    if (!readme.includes(image)) errors.push(`README.md must reference ${image}`);
   }
 
   const retiredPaths = [
@@ -239,6 +249,24 @@ function validateStrictPublicPackage() {
       if (content.includes(token)) errors.push(`Old comment-system token in ${rel}: ${token}`);
     }
   }
+
+  for (const file of walk(root)) {
+    const rel = path.relative(root, file);
+    if (!/\.md$/.test(rel)) continue;
+    const content = fs.readFileSync(file, "utf8");
+    if (/^##\s+Changelog\b/im.test(content) || /变更日志/.test(content)) {
+      errors.push(`Markdown changelog must be removed from ${rel}`);
+    }
+    if (isChineseAllowed(rel)) continue;
+    if (/[\u3400-\u9fff]/.test(content)) {
+      errors.push(`English public Markdown must not contain Chinese characters: ${rel}`);
+    }
+  }
+}
+
+function isChineseAllowed(rel) {
+  if (rel === "README.zh-CN.md") return true;
+  return /^examples\/html-hyperframes-video-project\/harness\/0[1-4]_/.test(rel);
 }
 
 function validateGoldenExampleQuality() {

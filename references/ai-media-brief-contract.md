@@ -1,32 +1,18 @@
-# AI Media Brief Contract / AI 媒体 Brief 契约
+# AI Media Brief Contract
 
-## Changelog / 变更日志
+AI media briefs are planning artifacts only. They describe asset requirements for future generation or editing, but this harness does not execute provider APIs.
 
-| 时间 / Time | 作者 / Author | 变更 / Change |
-|---|---|---|
-| 2026-05-17 00:08 | Sisyphus | Added provider-neutral AI media brief contract for v1 planning slots. |
+## Required Fields
 
-## Purpose / 目的
+- Asset need
+- Target frame or section
+- Source input
+- Style route
+- Must preserve
+- Must avoid
+- Aspect ratio
+- Rights or privacy risk
 
-AI media briefs plan possible Image2Image, Image2GPT, and Image-to-Video work without making those providers part of v1 core.
+## Review Rule
 
-AI 媒体 brief 规划可能的 Image2Image、Image2GPT、Image-to-Video 工作，但不把供应商执行纳入 v1 核心。
-
-## Required Fields / 必填字段
-
-- `request_id`
-- `task_type`: image2image / image2gpt / image-to-video
-- `source_assets`
-- `purpose`
-- `prompt`
-- `must_preserve`
-- `target_aspect_ratio`
-- `target_duration`
-- `review_slot`
-- `status`: planned / generated / accepted / rejected
-
-## Rules / 规则
-
-- Provider execution is optional and external. / 供应商执行是可选外部步骤。
-- Generated candidates must return to the Direction Board for review. / 生成候选必须回到 Direction Board 审查。
-- Accepted outputs must sync to the asset manifest before render handoff. / 接受的输出必须先同步到 asset manifest，再进入渲染交接。
+Generated media must be reviewed before it enters the Director Workbench. If the asset becomes must-use, add it to the Asset Wall and the critical-frame plan.

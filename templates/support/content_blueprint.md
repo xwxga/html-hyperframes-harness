@@ -1,33 +1,29 @@
-# Content Blueprint / 内容蓝图
+# Content Blueprint
 
-## Changelog / 变更日志
+Use this when the narrative needs to be separated from visual planning.
 
-| 时间 / Time | 作者 / Author | 变更 / Change |
-|---|---|---|
-| 2026-05-17 00:07 | Sisyphus | Added support manifest for source-supported content structure before visual review. |
+## Thesis
 
-## Purpose / 目的
+- Main claim:
+- Audience:
+- Desired takeaway:
+- Misread to avoid:
 
-Use this support manifest to lock what the video says before deciding how it looks.
+## Structure
 
-用本支持性 manifest 在决定视觉表现前锁定视频“说什么”。
-
-## Mainline / 主线
-
-- Narrative spine / 叙事主轴:
-- Opening hook / 开头 hook:
-- Ending landing point / 结尾落点:
-- Must-preserve claims / 必须保留的论点:
-- Must-not-change meanings / 不得改变的页面含义:
-
-## Section Map / 章节地图
-
-| Section ID / 章节 ID | Beat / 段落 | Purpose / 目的 | Source support / 来源支撑 | Page candidates / 候选页面 |
+| Section | Purpose | Evidence | Viewer emotion | Required visual proof |
 |---|---|---|---|---|
-| section-01 |  |  |  | page-01 |
+|  |  |  |  |  |
 
-## Lock Status / 锁定状态
+## Copy Lock
 
-- Status / 状态: draft / locked / unlocked-by-user
-- User approval source / 用户批准来源:
-- Allowed visual-only deltas / 允许的仅视觉变化:
+- Locked opening:
+- Locked middle claim:
+- Locked ending:
+- Words or claims that must not be changed:
+
+## Source Discipline
+
+- Source-supported claims:
+- Agent inferences:
+- Unverified claims:
