@@ -15,10 +15,7 @@ HTML HyperFrames Harness 是一个面向 HyperFrames workflow 的非官方、独
 
 ## 快速链接
 
-- [Live demo](https://xwxga.github.io/html-hyperframes-harness/)
 - [Director Workbench example](https://xwxga.github.io/html-hyperframes-harness/examples/html-hyperframes-video-project/harness/direction_board.html)
-- [Final HyperFrames source](https://xwxga.github.io/html-hyperframes-harness/examples/html-hyperframes-video-project/index.html)
-- [Preview MP4](https://xwxga.github.io/html-hyperframes-harness/examples/html-hyperframes-video-project/renders/html_hyperframes_5frame_preview.mp4)
 
 ## 这是什么
 
