@@ -218,6 +218,10 @@ function validateStrictPublicPackage() {
   if (/changelog/i.test(readme)) errors.push("README.md must not contain a changelog");
   if (!readme.includes("README.zh-CN.md")) errors.push("README.md must link to README.zh-CN.md for language switching");
   if (!chineseReadme.includes("README.md")) errors.push("README.zh-CN.md must link back to README.md");
+  for (const url of ["https://github.com/heygen-com/hyperframes", "https://github.com/nexu-io/open-design"]) {
+    if (!readme.includes(url)) errors.push(`README.md must acknowledge ${url}`);
+    if (!chineseReadme.includes(url)) errors.push(`README.zh-CN.md must acknowledge ${url}`);
+  }
   for (const image of ["docs/media/director-workbench-overview.png", "docs/media/director-workbench-frames.png"]) {
     if (!readme.includes(image)) errors.push(`README.md must reference ${image}`);
   }

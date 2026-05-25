@@ -83,6 +83,12 @@ The bundled example in `examples/html-hyperframes-video-project/` is a real 6-fr
 
 The example keeps its locked Chinese video titles because they are source content, not UI chrome.
 
+## Acknowledgements
+
+This project is built for people experimenting with [HyperFrames](https://github.com/heygen-com/hyperframes) workflows. Thanks to the HyperFrames team for making HTML-based video composition programmable, inspectable, and friendly to agent-driven production.
+
+The Director Workbench borrows interface language from familiar Figma-like and [OpenDesign](https://github.com/nexu-io/open-design)-style review patterns: canvas, artboards, inspector, timeline, and visual-system locking. OpenDesign is referenced here as design inspiration and UI vocabulary, not as an upstream dependency, fork relationship, or official affiliation.
+
 ## What This Is Not
 
 - Not a HyperFrames renderer.

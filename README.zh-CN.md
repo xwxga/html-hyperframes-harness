@@ -54,6 +54,12 @@ HTML HyperFrames Harness 是一个面向 HyperFrames workflow 的非官方、独
 
 示例中的中文视频标题会保留，因为它们是 source content，不是 UI 文案。
 
+## 致谢
+
+这个项目是为正在实验 [HyperFrames](https://github.com/heygen-com/hyperframes) workflow 的创作者和 agent 使用者做的。感谢 HyperFrames 团队把 HTML-based video composition 做成了可编程、可检查、也适合 agent-driven production 的工作流。
+
+Director Workbench 的界面语言借鉴了 Figma-like 和 [OpenDesign](https://github.com/nexu-io/open-design)-style 的审查模式：canvas、artboard、inspector、timeline 和 visual-system locking。这里引用 OpenDesign 是作为设计启发和 UI 语言，不代表 upstream dependency、fork 关系或官方 affiliation。
+
 ## 它不是什么
 
 - 不是 HyperFrames renderer。
