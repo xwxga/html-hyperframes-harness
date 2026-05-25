@@ -15,10 +15,7 @@ This harness makes those decisions visible first.
 
 ## Quick Links
 
-- [Live demo](https://xwxga.github.io/html-hyperframes-harness/)
 - [Director Workbench example](https://xwxga.github.io/html-hyperframes-harness/examples/html-hyperframes-video-project/harness/direction_board.html)
-- [Final HyperFrames source](https://xwxga.github.io/html-hyperframes-harness/examples/html-hyperframes-video-project/index.html)
-- [Preview MP4](https://xwxga.github.io/html-hyperframes-harness/examples/html-hyperframes-video-project/renders/html_hyperframes_5frame_preview.mp4)
 
 ## What It Is
 
